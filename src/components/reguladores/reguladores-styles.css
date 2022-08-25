@@ -1,0 +1,95 @@
+/*** Modal ***/
+.ReactModalPortal > div{
+    opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: opacity .2s ease-in-out;
+    z-index: 999;
+}
+
+.modal-fondo {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+
+.modal-reguladores {
+    background: white;
+    border-radius: 10px;
+    color: rgb(51, 51, 51);
+    display: inline;
+    margin-top: 20px;
+    max-height: 400px;
+    max-width: 900px;
+    outline: none;
+    overflow-y: auto;
+    padding: 10px;
+    position: absolute;
+}
+
+/* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+.modal-reguladores::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.modal-reguladores::-webkit-scrollbar:vertical {
+    width:11px;
+}
+
+.modal-reguladores::-webkit-scrollbar-button:increment,.modal-reguladores::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.modal-reguladores::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.modal-reguladores::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.modal-reguladores::-webkit-scrollbar-track {
+    border-radius: 10px;  
+    
+}
+
+/** AUTOCOMPLETE DIV **/
+
+.inventory-autocompelte {
+    border-bottom: rgb(170, 170, 170) 1px solid;
+}
+
+.invent-nobreake {
+    margin-bottom: 7px;
+}
+
+/* .img-loading {
+    float: right;
+    position: absolute;
+    left: 190px;
+    top: -32px;
+    width: 100px;
+}
+
+input {
+    padding: 10px;
+} */

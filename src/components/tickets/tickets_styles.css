@@ -1,0 +1,153 @@
+
+
+.tickets-list {
+    flex: 1 1 auto;
+    margin-top: 30px;
+    /* overflow-y: scroll; */
+}
+
+.ticket-item {
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(59, 59, 59, 0.4);
+    border-radius: 7px;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    margin-bottom: 15px;
+    /* overflow: hidden; */
+    width: 60vw;
+    position: relative;
+}
+
+ .lista {
+    position: absolute;
+    right: .5%;
+    top: 28px;
+    margin-top: -25px;
+}
+
+
+.ticket-item:hover {
+	transition: ease-out 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 3px 15px 0 rgba(0,0,0,0.3);
+    -webkit-transition: ease-out 0.1s;
+}
+
+.ticket-picture {
+    /* background-color: rgb(163, 163, 163); */
+    align-items: center;
+    border-radius: 100%;
+    display: flex;
+    /* font-size: x-large; */
+    color: #ffffff;
+    height: 60px;
+    justify-content: center;
+    margin-left: 10px;
+    padding: 5px;
+    width: 60px;
+    min-width: 60px;
+}
+
+.ticket-body {
+    padding: 10px;
+    float: left;
+}
+.ticket-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: auto;
+    margin-left: 10px;
+}
+.ticket-content {
+    font-size: 15px;
+    text-align: justify;
+    width: 45vw;
+    margin-left: 10px;
+}
+
+.ticket-date-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.ticket-date-box {
+    color: rgb(75, 74, 74);
+    font-size: 14px;
+}
+
+.ticket-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -25px;
+    position: absolute;
+    right: 8%;
+    top: 40px;
+}
+
+/* Style The Dropdown Button */
+.dropbtn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-menu {
+    border-radius: 5px;
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+    /* opacity: 0.9; */
+    right: 0;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #d6d4d4}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    background-color: #ffffff;
+  }
+
+  .badge-bg-open {
+      background-color: rgb(181, 255, 212);
+      color: rgb(26, 80, 34);
+      font-size: smaller;
+  }
+
+  .badge-bg-close {
+    background-color: rgb(255, 196, 196);
+    color: rgb(143, 9, 9);
+    font-size: smaller;
+}
+
