@@ -24,7 +24,6 @@
     "react-data-table-component-extensions": "^1.5.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.4",
-    "react-overlay-loader": "0.0.3",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -36,12 +35,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
