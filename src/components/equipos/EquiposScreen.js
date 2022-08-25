@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import FeatherIcon from 'feather-icons-react';
-import { Loader } from 'react-overlay-loader';
+// import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
 
 import 'react-data-table-component-extensions/dist/index.css';
@@ -279,10 +279,10 @@ const customStyles = {
             loaderSpeed={700}
         />
 
-            <Loader 
+            {/* <Loader 
                 fullPage 
                 loading={activeLoading}
-            />
+            /> */}
 
         {/* <Loader 
             fullPage 

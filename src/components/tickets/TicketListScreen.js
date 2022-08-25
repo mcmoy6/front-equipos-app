@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Loader } from 'react-overlay-loader';
+// import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
 
 
@@ -14,16 +14,16 @@ import './tickets_styles.css';
 
 export const TicketListScreen = () => {
 
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
     
-    useEffect( () => {
-        setShow(true);
+    // useEffect( () => {
+    //     setShow(true);
         
-        setTimeout(() => {
-            setShow(false);
-        }, 700);
+    //     setTimeout(() => {
+    //         setShow(false);
+    //     }, 700);
 
-      }, []);
+    //   }, []);
 
     // BARRA LOADING
     const ref = useRef(null);
@@ -44,10 +44,10 @@ export const TicketListScreen = () => {
     return (
     <div>
 
-        <Loader 
+        {/* <Loader 
             fullPage 
             loading={show}
-        />
+        /> */}
 
         <LoadingBar 
             color="#f11946" 
