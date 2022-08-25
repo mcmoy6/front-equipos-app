@@ -1,6 +1,9 @@
 {
   "name": "equipos-app",
   "version": "0.1.0",
+  "engines": {
+    "node": "16.17.0"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",
@@ -28,7 +31,6 @@
     "react-top-loading-bar": "^2.1.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
-    "serve": "^14.0.1",
     "styled-components": "^5.3.3",
     "sweetalert2": "^11.3.10",
     "web-vitals": "^2.1.4"
