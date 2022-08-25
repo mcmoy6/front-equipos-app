@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { TicketsAddNewBtn } from '../ui/ui-tickets/TicketsAddNewBtn';
 
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
-import FeatherIcon from 'feather-icons-react';
+// import FeatherIcon from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ticketClearSetActiveAction, ticketSetActiveAction, ticketsStartLoadingAction } from '../../actions/ticketsActions';
 import { DeleteTicketBtn } from '../ui/ui-tickets/DeleteTicketBtn';
