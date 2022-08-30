@@ -22,6 +22,12 @@ export const uiCloseModalEditEquAction = () => ({
     type: types.uiCloseModalEditEquipos
 });
 
+//************* ABRIR Y CERRAR SIDEBAR ************/
+
+export const uiMovilOpenMenuAction = () => ({
+    type: types.uiMovilOpenMenu
+});
+
 
 //*********** MODAL REGISTRAR EMPLEADO ***********/
 

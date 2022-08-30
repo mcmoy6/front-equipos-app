@@ -24,6 +24,8 @@ export const types = {
 
     uiOpenModalMonitor: '[ui] Open modal monitor',
     uiCloseModalMonitor: '[ui] Close modal monitor',
+
+    uiMovilOpenMenu: '[ui] Toggle movil open',
     
     authCheckingFinish: '[auth] Finish checking login state',
     authStartLogin: '[auth] Start login',

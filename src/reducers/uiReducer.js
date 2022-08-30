@@ -8,7 +8,8 @@ const initialState = {
     modalOpenPrinter: false,
     modalOpenPrinterEdit: false,
     modalOpenUps: false,
-    modalOpenMonitor: false
+    modalOpenMonitor: false,
+    movilOpenMenu: false
 }
 
 
@@ -89,6 +90,11 @@ export const uiReducer = ( state = initialState, action ) => {
                 ...state,
                 modalOpenPrinterEdit: false
             }
+
+        case types.uiMovilOpenMenu:
+            return Object.assign({}, state, {
+                movilOpenMenu: !state.movilOpenMenu
+            });
 
         case types.uiOpenModalUps:
             return {

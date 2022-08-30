@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 import { DashboardLoader } from '../../loaders/DashboardLoader';
+import { Typography }  from '@mui/material';
 
 export const HomeScreen = () => {
 
@@ -40,7 +41,9 @@ export const HomeScreen = () => {
         <DashboardLoader />
         :
         <div>
-            <h1>Home Screen</h1>
+         
+            <Typography variant='h3'>Home Screen</Typography>
+            
         </div>
       }
 

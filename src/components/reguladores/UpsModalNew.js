@@ -2,8 +2,11 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { IconButton } from '@mui/material';
+import { CloseOutlined } from '@mui/icons-material';
 
 import './reguladores-styles.css';
+
 import { reguladorStartAddNewAction, uiCloseModalUpsAction } from '../../actions/reguladoresActions';
 import { useForm } from '../../hooks/useForm';
 
@@ -42,7 +45,7 @@ export const UpsModalNew = () => {
     });
 
     const { 
-            serie,
+            // serie,
             serieCpu,
             marca,
             modelo,
@@ -86,6 +89,23 @@ export const UpsModalNew = () => {
             className="modal-reguladores"
             overlayClassName="modal-fondo"
         > 
+
+<           IconButton
+                size='small'
+                onClick={ closeModal }
+                sx={{
+                    color: 'black',
+                    backgroundColor: 'white',
+                    ':hover': { backgroundColor: 'white', opacity: 0.9 },
+                    position: 'fixed',
+                    right: { xs: 20, sm: 15, md:15, lg:15 },
+                    top: { xs: 3, sm: 5, md:5, lg:5 },
+                    
+                }}
+                >
+                <CloseOutlined sx={{ fontSize: 25 }} />
+            </IconButton>
+
         <h4> Nuevo Ups </h4>
         <hr />
 

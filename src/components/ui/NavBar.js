@@ -17,6 +17,7 @@ import { ShoppingCartScreen } from '../shoppingCart/ShoppingCartScreen';
 import { TicketListScreen } from '../tickets/TicketListScreen';
 import { RegisterScreen } from '../auth/RegisterScreen';
 import { EquiposRegisterNew } from '../equipos/EquiposRegisterNew';
+// import { LoginPage } from '../auth/LoginPage';
 // import { TicketScreen } from '../tickets/TicketScreen';
 
 
@@ -206,6 +207,12 @@ export const NavBar = () => {
                                 <span> Registrar usuario </span>
                                 </NavLink>
                             </li>
+                            {/* <li className="nav-item">
+                                <NavLink className="nav-item nav-link" to="/loginPage">
+                                <FeatherIcon icon="user" className="feather-sidebar" />
+                                <span> Login Page </span>
+                                </NavLink>
+                            </li> */}
 
                         </ul>
 
@@ -259,6 +266,7 @@ export const NavBar = () => {
                                 <Route path='tickets' element={<TicketListScreen />} />
                                 <Route path='register' element={<RegisterScreen />} />
                                 <Route path='equiposNew' element={<EquiposRegisterNew />} />
+                                {/* <Route path='loginPage' element={<LoginPage />} /> */}
 
                                 <Route path="/" element={<HomeScreen />} />
                                 

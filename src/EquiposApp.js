@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import { store } from './store/store'
 import { AppRouter } from './components/router/AppRouter';
+import { AppTheme } from './theme/AppTheme';
 
 
 export const EquiposApp = () => {
@@ -12,8 +13,10 @@ export const EquiposApp = () => {
 
   return (
      <Provider store={store}>
-      
-       <AppRouter />
+
+      <AppTheme >
+        <AppRouter />
+      </AppTheme>
 
      </Provider>
      

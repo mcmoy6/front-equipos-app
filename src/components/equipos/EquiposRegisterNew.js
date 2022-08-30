@@ -234,7 +234,7 @@ export const EquiposRegisterNew = () => {
     const handleInventarioSelected = (event) => {
         // console.log(event.length);
         const [elementos] = event;
-        console.log(elementos);
+        // console.log(elementos);
         dispatch( equipoSetActiveTempAction(!!elementos ? elementos : null) );
         setShow(true);
         barLoading();
@@ -343,7 +343,7 @@ export const EquiposRegisterNew = () => {
     }
 
     const handleUpsSelected = (event) => {
-         console.log(event);
+        //  console.log(event);
         setUpsSingleSelections(event);
 
         const [snUps] = event.map(datosUps =>(datosUps.serie_ups));
@@ -737,7 +737,7 @@ const closeModal = () => {
                                     {option.label}
                                     <div>
                                         <small>
-                                            Nom: {option.nombre+' '+option.apellido_pat} - Puesto: {option.denom_puesto}
+                                            {option.nombre+' '+option.apellido_pat} - Puesto: {option.denom_puesto}
                                         </small>
                                     </div>
                                 </div>
@@ -749,18 +749,25 @@ const closeModal = () => {
 
                 <div className="row g-3 mb-3">
 
-                    <div className="input-group">
-                        <span className="input-group-text">Nombre y apellidos</span>
-                        <input 
-                            type="text" 
-                            aria-label="First name" 
-                            className="form-control" 
-                            placeholder="Nombre(s)" 
-                            name="nombreUsuario"
-                            value={activeRow ? activeRow.nombre : nombreUsuario}
-                            onChange={ handleRegisterInputChange }
-                            ref={inputNameRef}
-                        />
+                    <div className="col-sm-6">
+                        <div className="input-group">
+                            <span className="input-group-text">Nombre</span>
+                            <input 
+                                type="text" 
+                                aria-label="First name" 
+                                className="form-control" 
+                                placeholder="Nombre(s)" 
+                                name="nombreUsuario"
+                                value={activeRow ? activeRow.nombre : nombreUsuario}
+                                onChange={ handleRegisterInputChange }
+                                ref={inputNameRef}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="col-sm-6">
+                        <div className="input-group">
+                        <span className="input-group-text">Apellidos</span>
                         <input 
                             type="text" 
                             aria-label="Last name" 
@@ -770,6 +777,7 @@ const closeModal = () => {
                             value={activeRow ? activeRow.apellido_pat +' '+activeRow.apellido_mat : apellidos}
                             onChange={ handleRegisterInputChange }
                         />
+                        </div>
                     </div>
                     
                 </div>

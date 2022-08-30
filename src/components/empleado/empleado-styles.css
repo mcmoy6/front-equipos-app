@@ -29,17 +29,45 @@
 }
 
 
-
-.modal2 {
+.modal-empleado {
     background: white;
-    border-radius: 5px;
+    border-radius: 10px;
     color: rgb(51, 51, 51);
     display: inline;
     margin-top: 20px;
-    max-height: 440px;
+    max-height: 370px;
     max-width: 900px;
     outline: none;
-    /* overflow-y: auto; */
+    overflow-y: auto;
     padding: 10px;
     position: absolute;
+}
+
+/* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+.modal-empleado::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.modal-empleado::-webkit-scrollbar:vertical {
+    width:11px;
+}
+
+.modal-empleado::-webkit-scrollbar-button:increment,.modal-empleado::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.modal-empleado::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.modal-empleado::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.modal-empleado::-webkit-scrollbar-track {
+    border-radius: 10px;  
+    
 }

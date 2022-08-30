@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { empleadoClearCustOptionAction, empleadoClearOpenModalEditAction, empleadoSetActiveAction, empleadoSetActiveEditAction, empleadoStartAddNewAction } from '../../actions/empleadosActions';
+
+import { IconButton } from '@mui/material';
+import { CloseOutlined } from '@mui/icons-material';
+
+import { empleadoClearCustOptionAction, empleadoSetActiveAction, empleadoSetActiveEditAction, empleadoStartAddNewAction } from '../../actions/empleadosActions';
 import { uiCloseModalEmpleadoAction } from '../../actions/equiposActions';
 
 
@@ -120,9 +124,24 @@ export const EmpleadoModalNew = () => {
             style={customStyles}
             contentLabel="Example Modal"
             closeTimeoutMS={ 200 }
-            className="modal2"
+            className="modal-empleado"
             overlayClassName="modal-fondo"
         >
+            <IconButton
+                size='small'
+                onClick={ closeModal }
+                sx={{
+                    color: 'black',
+                    backgroundColor: 'white',
+                    ':hover': { backgroundColor: 'white', opacity: 0.9 },
+                    position: 'fixed',
+                    right: { xs: 20, sm: 15, md:15, lg:15 },
+                    top: { xs: 3, sm: 5, md:5, lg:5 },
+                    
+                }}
+                >
+                <CloseOutlined sx={{ fontSize: 25 }} />
+            </IconButton>
 
             <h5> REGISTRAR EMPLEADO </h5>
             <hr />
@@ -152,36 +171,47 @@ export const EmpleadoModalNew = () => {
 
                 <div className="row g-3 mb-3">
 
-                    <div className="input-group">
-                        <span className="input-group-text">Nombre y apellidos</span>
-                        <input 
-                            type="text" 
-                            aria-label="First name" 
-                            className="form-control" 
-                            placeholder="Nombre(s)" 
-                            name="nombre"
-                            value={nombre}
-                            onChange={ handleRegisterInputChange }
-                            ref={inputRefName}
-                        />
-                        <input 
-                            type="text" 
-                            aria-label="Last name" 
-                            className="form-control" 
-                            placeholder="Primer apellido"
-                            name="apellido_pat"
-                            value={apellido_pat}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        <input 
-                            type="text" 
-                            aria-label="Last name" 
-                            className="form-control" 
-                            placeholder="Segundo apellido"
-                            name="apellido_mat"
-                            value={apellido_mat}
-                            onChange={ handleRegisterInputChange }
-                        />
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                            <span className="input-group-text">Nombre</span>
+                            <input 
+                                type="text" 
+                                aria-label="First name" 
+                                className="form-control" 
+                                placeholder="Nombre(s)" 
+                                name="nombre"
+                                value={nombre}
+                                onChange={ handleRegisterInputChange }
+                                ref={inputRefName}
+                            />
+                        </div>
+                    </div>
+                    
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                            <span className="input-group-text">Paterno</span>
+                            <input 
+                                type="text" 
+                                aria-label="Last name" 
+                                className="form-control" 
+                                name="apellido_pat"
+                                value={apellido_pat}
+                                onChange={ handleRegisterInputChange }
+                            />
+                            </div>
+                        </div>
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                            <span className="input-group-text">Materno</span>
+                            <input 
+                                type="text" 
+                                aria-label="Last name" 
+                                className="form-control" 
+                                name="apellido_mat"
+                                value={apellido_mat}
+                                onChange={ handleRegisterInputChange }
+                            />
+                        </div>
                     </div>
                     
                 </div>

@@ -1,4 +1,3 @@
-import { fetchConToken } from '../helpers/fetch';
 import {types} from '../types/types';
 
 

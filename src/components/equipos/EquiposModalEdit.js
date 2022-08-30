@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { Typeahead } from 'react-bootstrap-typeahead'; // ES2015
 import { useDispatch, useSelector } from 'react-redux';
-import { equipoClearSetActiveAction, equipoClearTargetActiveAction, equiposStartAddNewAction, equiposStartUpdateAction, uiCloseModalEditEquAction, uiCloseModalEquAction, uiOpenModalEmpleadoAction } from '../../actions/equiposActions';
+import { IconButton } from '@mui/material';
+import { CloseOutlined } from '@mui/icons-material';
+
+import { equiposStartUpdateAction, uiCloseModalEditEquAction, uiOpenModalEmpleadoAction } from '../../actions/equiposActions';
 
 
 import './equipos-styles.css';
@@ -101,7 +104,7 @@ export const EquiposModalEdit = () => {
             setSitioSingleSelections(sitioTargetTypead);
 
         }
-    }, [activeRowEquipos]);
+    }, [activeRowEquipos, targetTypead, sitioTargetTypead]);
 
     useEffect( () => {
         if (activeOpenModEdit) {
@@ -110,7 +113,7 @@ export const EquiposModalEdit = () => {
                 inputObservRefEdit.current.focus();
             }, 500);
         }
-      }, [activeRowEdit]);
+      }, [activeRowEdit, activeOpenModEdit]);
 
     //console.log(singleSelections)   
 
@@ -243,6 +246,23 @@ export const EquiposModalEdit = () => {
             className="modal"
             overlayClassName="modal-fondo"
         > 
+
+        <IconButton
+            size='small'
+            onClick={ closeModal }
+            sx={{
+                color: 'black',
+                backgroundColor: 'white',
+                ':hover': { backgroundColor: 'white', opacity: 0.9 },
+                position: 'fixed',
+                right: { xs: 20, sm: 15, md:15, lg:15 },
+                top: { xs: 3, sm: 5, md:5, lg:5 },
+                
+            }}
+            >
+            <CloseOutlined sx={{ fontSize: 25 }} />
+        </IconButton>
+
         <h5> ACTUALIZAR EQUIPO </h5>
         <hr />
 
@@ -423,12 +443,12 @@ export const EquiposModalEdit = () => {
                 
                 <label className="form-label">Datos del Empleado</label>
 
-                <div className="row g-3 mb-5">
+                <div className="row g-3 mb-3">
                         <div className="input-group">
                         <span className="input-group-text">Num. Empleado:</span>
                             <Typeahead
                                 id="basic-typeahead-single"
-                                className='form-control'
+                                
                                 labelKey="label"
                                 newSelectionPrefix="Agregar nvo: "
                                 onChange={handleSelected}
@@ -449,30 +469,35 @@ export const EquiposModalEdit = () => {
                 </div>
 
                 <div className="row g-3 mb-3">
-
-                    <div className="input-group">
-                        <span className="input-group-text">Nombre y apellidos</span>
-                        <input 
-                            type="text" 
-                            aria-label="First name" 
-                            className="form-control" 
-                            placeholder="Nombre(s)" 
-                            name="nombreUsuario"
-                            value={activeRowEdit ? activeRowEdit.nombre : nombreUsuario}
-                            onChange={ handleRegisterInputChange }
-                            ref={inputNameRefEdit}
-                        />
-                        <input 
-                            type="text" 
-                            aria-label="Last name" 
-                            className="form-control" 
-                            placeholder="Apellidos"
-                            name="apellidos"
-                            value={activeRowEdit ? activeRowEdit.apellido_pat +' '+activeRowEdit.apellido_mat : apellidos}
-                            onChange={ handleRegisterInputChange }
-                        />
+                    <div className="col-sm-6">
+                        <div className="input-group">
+                            <span className="input-group-text">Nombre</span>
+                            <input 
+                                type="text" 
+                                aria-label="First name" 
+                                className="form-control" 
+                                placeholder="Nombre(s)" 
+                                name="nombreUsuario"
+                                value={activeRowEdit ? activeRowEdit.nombre : nombreUsuario}
+                                onChange={ handleRegisterInputChange }
+                                ref={inputNameRefEdit}
+                            />
+                        </div>
                     </div>
-                    
+                    <div className="col-sm-6">
+                        <div className="input-group">
+                        <span className="input-group-text">Apellidos</span>
+                            <input 
+                                type="text" 
+                                aria-label="Last name" 
+                                className="form-control" 
+                                placeholder="Apellidos"
+                                name="apellidos"
+                                value={activeRowEdit ? activeRowEdit.apellido_pat +' '+activeRowEdit.apellido_mat : apellidos}
+                                onChange={ handleRegisterInputChange }
+                            />
+                        </div>
+                    </div>
                 </div>
 
 

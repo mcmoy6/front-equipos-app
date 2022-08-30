@@ -6,31 +6,31 @@ import 'react-data-table-component-extensions/dist/index.css';
 // import FeatherIcon from 'feather-icons-react';
 // import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
-import { Checkbox, withStyles } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import { blue, grey } from '@material-ui/core/colors';
+// import { Checkbox, withStyles } from '@material-ui/core';
+// import { IconButton } from '@material-ui/core';
+// import { blue, grey } from '@material-ui/core/colors';
 // import AddIcon from '@material-ui/icons/Add';
-import Edit from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+// import Edit from '@material-ui/icons/Edit';
+// import DeleteIcon from '@material-ui/icons/Delete';
 
 import './printer-styles.css';
 
 
 import { AddNewPrintBtn } from '../ui/ui-printers/AddNewPrintBtn';
 import { PrinterModalNew } from './PrinterModalNew';
-import { printerClearActiveAction, printerSetActiveAction, printersStartLoadingAction, uiOpenModalPrinterEditAction } from '../../actions/printersActions';
+import { printerClearActiveAction, printerSetActiveAction, printersStartLoadingAction } from '../../actions/printersActions';
 import { BootstrapCardDataTable } from '../../loaders/BootstrapCardDataTable';
 import { PrinterModalEdit } from './PrinterModalEdit';
 
-const StyledCheckbox = withStyles({
-    root: {
-        color: grey[500],
-        '&$checked': {
-          color: blue[600],
-        },
-      },
-      checked: {},
-  })(Checkbox);  
+// const StyledCheckbox = withStyles({
+//     root: {
+//         color: grey[500],
+//         '&$checked': {
+//           color: blue[600],
+//         },
+//       },
+//       checked: {},
+//   })(Checkbox);  
 
 
 createTheme('solarized', {
@@ -240,11 +240,11 @@ export const PrinterScreen = () => {
         
     const contextActions = useMemo(() => {
 
-        const handleEditprinter = () => {
+        // const handleEditprinter = () => {
             
-            dispatch( uiOpenModalPrinterEditAction() );
+        //     dispatch( uiOpenModalPrinterEditAction() );
 
-        };
+        // };
 
         return (
             <div>
@@ -253,20 +253,20 @@ export const PrinterScreen = () => {
                     <i className="fas fa-edit"></i>
                 </div> */}
 
-                <IconButton color="inherit" onClick={handleEditprinter}>
+                {/* <IconButton color="inherit" onClick={handleEditprinter}>
                     <Edit fontSize='small' />
                 </IconButton>
 
                 <IconButton color="inherit">
                     <DeleteIcon fontSize='small' />
-                </IconButton> 
+                </IconButton>  */}
 
                     {/* <FeatherIcon icon="trash-2" className="feather-actions"/> */}
                     {/* <i className="fas fa-trash"></i> */}
             
             </div>
         );
-    }, [ dispatch ]); // Agregar el dispatch al hacer el handleDelete
+    }, []); // Agregar el dispatch al hacer el handleDelete
 
     // const actions = (
     //     <IconButton color="inherit">
@@ -322,7 +322,7 @@ export const PrinterScreen = () => {
                         selectableRows
                         fixedHeader={true}
                         fixedHeaderScrollHeight='390px'
-                        selectableRowsComponent={StyledCheckbox}
+                        // selectableRowsComponent={StyledCheckbox}
                         selectableRowsHighlight={true}
                         selectableRowsSingle
                         // subHeader={showSubHeader}

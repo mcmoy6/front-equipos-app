@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { empeladosStartLoadingAction } from '../../../actions/empleadosActions';
-import { sitiosStartLoadingAction } from '../../../actions/sitiosActions';
+
 import { uiOpenModalTicketAction } from '../../../actions/ticketsActions';
 
 export const TicketsAddNewBtn = () => {
@@ -9,8 +8,7 @@ export const TicketsAddNewBtn = () => {
     const dispatch = useDispatch();
 
     const handleClickNewTicket = () => {
-        // dispatch( empeladosStartLoadingAction() );
-        // dispatch( sitiosStartLoadingAction() );
+        
         dispatch( uiOpenModalTicketAction() );
     }
 
