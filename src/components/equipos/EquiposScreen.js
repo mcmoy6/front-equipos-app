@@ -27,17 +27,17 @@ import { loadingDeactivateAction } from '../../actions/loadingActions';
 const columns = [
   
   {
-      name: 'Serie Cpu',
+      name: 'S/ Cpu',
       selector: row => row.serieCpu,
       sortable: true,
   },
   {
-      name: 'Serie Monitor',
+      name: 'S/ Monitor',
       selector: row => row.serieMonitor,
       sortable: true,
   },
   {
-      name: 'Serie No Break',
+      name: 'S/ No Break',
       selector: row => row.serieNobreak,
       sortable: true,
   },

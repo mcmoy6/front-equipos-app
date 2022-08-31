@@ -390,10 +390,15 @@ const handleSubmitForm = (e) => {
     //     // En caso de que el titulo tenga menos de 2 caracteres se manda llamar el estado "setValidarTitulo" y se cambia a false.
     //     return setValidarFuap(false);
     // }
+    
 
-    if( area.trim().length < 2 ){
+    if( area.trim().length < 2 && activeRow.denom_servicio.trim().length < 2 ){
         // En caso de que el titulo tenga menos de 2 caracteres se manda llamar el estado "setValidarTitulo" y se cambia a false.
         return setValidarArea(false);
+    }
+
+    if (activeRow) {
+        setValidarArea(true);
     }
 
     if ( activeRow ) {

@@ -173,7 +173,15 @@ export const equiposStartUpdateAction = ( equipo ) => {
             if (body.ok) {
 
                 dispatch( rowUpdateAction(equipo) );
-                console.log(body.msg);
+                // console.log(body.msg);
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: body.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
             } else {
                 console.log(body.msg);

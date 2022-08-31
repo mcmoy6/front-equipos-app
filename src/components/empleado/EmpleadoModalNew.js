@@ -80,7 +80,7 @@ export const EmpleadoModalNew = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // console.log(formValues);
+        console.log(formValues);
         dispatch(empleadoStartAddNewAction( {
             ...formValues,
             label: custOption
