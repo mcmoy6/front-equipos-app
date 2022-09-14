@@ -1,6 +1,9 @@
 import { fetchConToken } from '../helpers/fetch';
 import {types} from '../types/types';
 import Swal from 'sweetalert2';
+import { toast, Zoom } from 'react-toastify';
+
+
 import { empeladosStartLoadingAction } from './empleadosActions';
 import { sitiosStartLoadingAction } from './sitiosActions';
 import { inventariosStartLoadingAction } from './inventariosActions';
@@ -105,12 +108,13 @@ export const equiposStartAddNewAction = ( computer ) => {
 
 
             }else {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: body.msg,
-                    showConfirmButton: true,
-                  });
+                
+                toast.error(body.errors.area.msg, {
+                    autoClose: 1500,
+                    position: toast.POSITION.TOP_CENTER,
+                    transition: Zoom,
+                    theme: "colored"
+                });
 
                 dispatch( empeladosStartLoadingAction() );
                 dispatch( sitiosStartLoadingAction() );
@@ -211,7 +215,7 @@ export const equipoStartDeleteAction = () => {
             if ( body.ok) {
 
                 dispatch( equipoRowDeletedAction() );
-                console.log(body.msg);
+                
             } else {
                 console.log('Algo pasó, algun problema ocurrió...');
             }

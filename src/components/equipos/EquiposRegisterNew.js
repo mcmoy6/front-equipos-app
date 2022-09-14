@@ -4,6 +4,9 @@ import { Typeahead } from 'react-bootstrap-typeahead'; // ES2015
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
+import { ToastContainer, toast, Zoom  } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
  
 // import 'react-overlay-loader/styles.css';
 
@@ -126,15 +129,56 @@ export const EquiposRegisterNew = () => {
 
     const [validarArea, setValidarArea] = useState(true);
 
+    const [disabledForm, setDisabledForm] = useState(false);
+
 
     useEffect( () => {
         if (activeRow) {
-            setTimeout(() => {
-                refAutoComplete.current.blur();
-                inputObservRef.current.focus();
-            }, 500);
+
+    // 👇 React Hook useEffect has a missing dependency: 'formValues'. 
+    // Either include it or remove the dependency array.
+            
+        const focusFormValues = setInterval( () =>{
+
+            setDisabledForm(true);
+            
+            setFormValues({
+                ...formValues,
+                nombreUsuario: activeRow.nombre,
+                apellidos: activeRow.apellido_pat+' '+activeRow.apellido_mat,
+                puesto: activeRow.denom_puesto,
+                area: activeRow.denom_servicio,
+                extension: activeRow.extension,
+                email: activeRow.email,
+
+            }, 3000);
+
+         });   
+
+         refAutoComplete.current.blur();
+         inputObservRef.current.focus();
+
+         return () => clearInterval( focusFormValues );
+
+            // setTimeout(() => {
+
+            //     setFormValues({
+            //         ...formValues,
+            //         nombreUsuario: activeRow.nombre,
+            //         apellidos: activeRow.apellido_pat+' '+activeRow.apellido_mat,
+            //         puesto: activeRow.denom_puesto,
+            //         area: activeRow.denom_servicio,
+            //         extension: activeRow.extension,
+            //         email: activeRow.email,
+    
+            //     });
+
+            //     refAutoComplete.current.blur();
+            //     inputObservRef.current.focus();
+            // }, 500);
+
         }
-      }, [activeRow]);
+      }, [activeRow, formValues]);
 
       useEffect(() => {
         if ( equiposGoBack ) {
@@ -152,6 +196,8 @@ export const EquiposRegisterNew = () => {
         dispatch( empeladosStartLoadingAction() );
         dispatch(sitiosStartLoadingAction());
         dispatch(inventariosStartLoadingAction());
+
+        // notify();
 
         return () => {
 
@@ -198,7 +244,7 @@ export const EquiposRegisterNew = () => {
     //console.log(singleSelections)   
 
     const handleRegisterInputChange = ({ target }) => {
-        //console.log(singleSelections)
+
             setFormValues({
                 ...formValues,
                 [target.name]: target.value,
@@ -390,11 +436,17 @@ const handleSubmitForm = (e) => {
     //     // En caso de que el titulo tenga menos de 2 caracteres se manda llamar el estado "setValidarTitulo" y se cambia a false.
     //     return setValidarFuap(false);
     // }
-    
 
-    if( area.trim().length < 2 && activeRow.denom_servicio.trim().length < 2 ){
+    if( area.trim().length < 2){
         // En caso de que el titulo tenga menos de 2 caracteres se manda llamar el estado "setValidarTitulo" y se cambia a false.
-        return setValidarArea(false);
+               
+        return toast.error('Ingresa el área del usuario', {
+                autoClose: false,
+                position: toast.POSITION.TOP_CENTER,
+                transition: Zoom,
+                theme: "colored"
+            });
+
     }
 
     if (activeRow) {
@@ -470,6 +522,7 @@ const closeModal = () => {
 
         <h5> NUEVO REGISTRO </h5>
         <hr />
+        <ToastContainer />
         {/* { show && <img className='img-loading' alt='My loading' src="http://rpg.drivethrustuff.com/shared_images/ajax-loader.gif"/> } */}
             <form className="container" onSubmit={ handleSubmitForm } id="formModal" >
 
@@ -763,9 +816,10 @@ const closeModal = () => {
                                 className="form-control" 
                                 placeholder="Nombre(s)" 
                                 name="nombreUsuario"
-                                value={activeRow ? activeRow.nombre : nombreUsuario}
+                                value={ nombreUsuario }
                                 onChange={ handleRegisterInputChange }
                                 ref={inputNameRef}
+                                disabled={disabledForm}
                             />
                         </div>
                     </div>
@@ -779,8 +833,9 @@ const closeModal = () => {
                             className="form-control" 
                             placeholder="Apellidos"
                             name="apellidos"
-                            value={activeRow ? activeRow.apellido_pat +' '+activeRow.apellido_mat : apellidos}
+                            value={ apellidos }
                             onChange={ handleRegisterInputChange }
+                            disabled={disabledForm}
                         />
                         </div>
                     </div>
@@ -800,8 +855,9 @@ const closeModal = () => {
                             className="form-control" 
                             id="specificSizeInputGroupUsername" 
                             name="puesto"
-                            value={activeRow ? activeRow.denom_puesto : puesto}
+                            value={ puesto }
                             onChange={ handleRegisterInputChange }
+                            disabled={disabledForm}
                         />
                         </div>
                     </div>
@@ -813,8 +869,9 @@ const closeModal = () => {
                             className={`form-control ${ !validarArea && 'is-invalid' }`} 
                             id="specificSizeInputGroupUsername"
                             name="area"
-                            value={activeRow ? activeRow.denom_servicio : area}
+                            value={ area }
                             onChange={ handleRegisterInputChange }
+                            disabled={disabledForm}
                         />
                         </div>
                     </div>
@@ -826,8 +883,9 @@ const closeModal = () => {
                             className="form-control" 
                             id="specificSizeInputGroupUsername" 
                             name="extension"
-                            value={activeRow ? activeRow.extension : extension}
+                            value={ extension }
                             onChange={ handleRegisterInputChange }
+                            disabled={disabledForm}
                         />
                         </div>
                     </div>
@@ -841,8 +899,9 @@ const closeModal = () => {
                         className="form-control" 
                         placeholder="email" 
                         name="email"
-                        value={activeRow ? activeRow.email : email}
+                        value={ email }
                         onChange={ handleRegisterInputChange }
+                        disabled={disabledForm}
                     />
                 </div>
 

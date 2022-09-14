@@ -5,7 +5,8 @@ const initialState = {
     activeRow: null,
     activeRowEdit: null,
     custOption: null,
-    activeOpenModEdit: false
+    activeOpenModEdit: false,
+    empleadoTargetTypead: []
 }
 
 export const empleadosReducer = ( state = initialState, action ) => {
@@ -81,7 +82,13 @@ export const empleadosReducer = ( state = initialState, action ) => {
                 ...state,
                 data: []
             }
-    
+
+        case types.empleadoSetTargetActive:
+            return {
+                ...state,
+                empleadoTargetTypead: [action.payload]
+            }
+
         default:
             return state
     }

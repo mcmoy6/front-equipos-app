@@ -286,6 +286,7 @@ export const PrinterScreen = () => {
             <LoadingBar 
                 color="#f11946" 
                 ref={ref} 
+                height={3}
                 shadow={true} 
                 loaderSpeed={700}
             />

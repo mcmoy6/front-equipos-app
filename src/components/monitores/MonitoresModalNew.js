@@ -45,11 +45,6 @@ export const MonitoresModalNew = () => {
             serieCpu,
             marca,
             modelo,
-            ip,
-            ipPc,
-            hostImpresora,
-            hostPc,
-            ubicacion,
             observaciones } = formValues;
 
     const closeModal = () => {

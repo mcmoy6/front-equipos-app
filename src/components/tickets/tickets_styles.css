@@ -16,10 +16,11 @@
     display: flex;
     margin-bottom: 15px;
     /* overflow: hidden; */
-    width: 60vw;
+    width: 75vw;
     position: relative;
 }
 
+/* CAMBIAR STATUS */
  .lista {
     position: absolute;
     right: .5%;
@@ -83,9 +84,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: -25px;
+    margin-top: -30px;
     position: absolute;
-    right: 8%;
+    right: 15%;
     top: 40px;
 }
 

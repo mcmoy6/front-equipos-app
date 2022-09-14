@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemText, ListItemButton, ListItemIcon, Toolbar, Typography } from '@mui/material'
 import { Computer, Dashboard, PrintRounded, SupportAgentRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -14,11 +14,13 @@ export const SideBar = ({ drawerWidth = 240 }) => {
 
     const { name } = useSelector( state => state.auth);
 
-    // const [selectedIndex, setSelectedIndex] = useState(1);
+    const lastPath = localStorage.getItem('lastpath');
+    
+    const [selectedIndex, setSelectedIndex] = useState(lastPath);
 
-    const handleDrawerToggle = () => {
+    const handleDrawerToggle = (event, index) => {
 
-        // setSelectedIndex(index);
+        setSelectedIndex(index);
 
         dispatch( uiMovilOpenMenuAction() );
 
@@ -26,6 +28,12 @@ export const SideBar = ({ drawerWidth = 240 }) => {
     
 
     const { movilOpenMenu } = useSelector( state => state.ui);
+
+
+
+    const handleListItemClick = (event, index) => {
+        setSelectedIndex(index);
+      };
 
   return (
     <Box
@@ -55,8 +63,8 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 
                 <ListItem disablePadding>
                     <ListItemButton 
-                        onClick={ handleDrawerToggle }
-                        // selected={selectedIndex === 0}
+                        selected={selectedIndex === '/home'}
+                        onClick={ (event) => handleDrawerToggle(event, '/home') }
                     >
                         <ListItemIcon>
                             <Dashboard />
@@ -71,8 +79,8 @@ export const SideBar = ({ drawerWidth = 240 }) => {
 
                 <ListItem disablePadding>
                     <ListItemButton 
-                        onClick={ handleDrawerToggle }
-                        // selected={selectedIndex === 1}
+                        selected={selectedIndex === '/equipos'}
+                        onClick={ (event) => handleDrawerToggle(event, '/equipos') }
                     >
                         <ListItemIcon>
                             <Computer />
@@ -87,8 +95,8 @@ export const SideBar = ({ drawerWidth = 240 }) => {
 
                 <ListItem disablePadding>
                     <ListItemButton 
-                        onClick={ handleDrawerToggle }
-                        // selected={selectedIndex === 2}
+                        selected={selectedIndex === '/impresoras'}
+                        onClick={ (event) => handleDrawerToggle(event, '/impresoras') }
                     >
                         <ListItemIcon>
                             <PrintRounded />
@@ -103,8 +111,8 @@ export const SideBar = ({ drawerWidth = 240 }) => {
 
                 <ListItem disablePadding>
                     <ListItemButton 
-                        onClick={ handleDrawerToggle }
-                        
+                        selected={ selectedIndex === '/tickets' }
+                        onClick={ (event) => handleDrawerToggle(event, '/tickets') }
                     >
                         <ListItemIcon>
                             <SupportAgentRounded />
@@ -138,7 +146,10 @@ export const SideBar = ({ drawerWidth = 240 }) => {
         <Divider />
          <List>
                 <ListItem  disablePadding>
-                    <ListItemButton>
+                    <ListItemButton 
+                        selected={selectedIndex === '/home'} 
+                        onClick={(event) => handleListItemClick(event, '/home')}
+                    >
                         <ListItemIcon>
                             <Dashboard />
                         </ListItemIcon>
@@ -151,7 +162,10 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 </ListItem>
 
                 <ListItem  disablePadding>
-                    <ListItemButton>
+                    <ListItemButton 
+                            selected={selectedIndex === '/equipos'}
+                            onClick={(event) => handleListItemClick(event, '/equipos')}
+                        >
                         <ListItemIcon>
                             <Computer />
                         </ListItemIcon>
@@ -163,7 +177,10 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                     </ListItemButton>
                 </ListItem>
                 <ListItem  disablePadding>
-                    <ListItemButton>
+                    <ListItemButton 
+                        selected={selectedIndex === '/impresoras'} 
+                        onClick={(event) => handleListItemClick(event, '/impresoras')}
+                    >
                         <ListItemIcon>
                             <PrintRounded />
                         </ListItemIcon>
@@ -175,7 +192,10 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                     </ListItemButton>
                 </ListItem>
                 <ListItem  disablePadding>
-                    <ListItemButton>
+                    <ListItemButton 
+                        selected={selectedIndex === '/tickets'}
+                        onClick={(event) => handleListItemClick(event, '/tickets')}
+                    >
                         <ListItemIcon>
                             <SupportAgentRounded />
                         </ListItemIcon>

@@ -60,6 +60,8 @@ export const types = {
     empleadosGetLoaded: '[empleados] Empleados get loaded',
     empleadosClearLoaded: '[empleados] Empleados clear loaded',
     empleadoAddNew: '[empleados] Empleado add new',
+    empleadoSetTargetActive: '[empleados] Empleado set target active',
+    empleadoClearTargetActive: '[empleados] Empleado clear target active',
 
     empleadoOpenModalEdit: '[empleados] Empleado open modal edit',
     empeladoClearOpenModalEdit: '[empleados] Empleado clear open modal edit',
@@ -70,6 +72,7 @@ export const types = {
     sitioClearTargetActive: '[sitios] Sitios clear target active',
 
     ticketsGetLoaded: '[tickets] Tickets get loaded',
+    ticketSingleGetLoaded: '[ticket] Ticket single',
     ticketSetActive: '[tickets] Ticket set active',
     ticketClearActive: '[tickets] Ticket clear active',
     ticketsAddNew: '[tickets] Ticket add new',

@@ -59,10 +59,10 @@ export const UpsModalNew = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        console.log({
-            ...formValues,
-            serieCpu: activeEquiposTemp.serie_cpu
-        });
+        // console.log({
+        //     ...formValues,
+        //     serieCpu: activeEquiposTemp.serie_cpu
+        // });
 
         dispatch( reguladorStartAddNewAction({
             ...formValues,

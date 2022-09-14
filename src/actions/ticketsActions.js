@@ -1,4 +1,6 @@
 import { fetchConToken } from '../helpers/fetch';
+import { toast, Zoom } from 'react-toastify';
+
 import {types} from '../types/types';
 
 
@@ -15,7 +17,14 @@ export const ticketsStartAddNewAction = ( ticket ) => {
             if ( body.ok) {
                 ticket.id = body.ticketData.id
                 dispatch( ticketsAddNewAction(ticket) );
-                console.log(body.msg);
+
+                toast.success(body.msg, {
+                    autoClose: 1500,
+                    position: toast.POSITION.TOP_RIGHT,
+                    transition: Zoom,
+                    theme: "colored"
+                });
+
             }else {
                 console.log(body.msg);
             }
@@ -54,6 +63,30 @@ export const ticketsStartLoadingAction = () => {
 const ticketsLoadedAction = ( tickets ) => ({
     type: types.ticketsGetLoaded,
     payload: tickets
+});
+
+export const ticketStartSingleLoadingAction = ( ticketData ) => {
+    return async( dispatch ) => {
+
+        try {
+
+            const resp = await fetchConToken(`ticket/${ticketData.searchText}`);
+            const body = await resp.json();
+
+            const ticketsData = body.ticket;
+
+            //console.log(equiposComp);
+            dispatch( ticketSingleLoadedAction( ticketsData ) );
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+const ticketSingleLoadedAction = ( ticket ) => ({
+    type: types.ticketSingleGetLoaded,
+    payload: ticket
 });
 
 export const ticketStartChangeStatusAction = ( ticket ) => {

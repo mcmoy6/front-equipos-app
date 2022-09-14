@@ -1,3 +1,5 @@
+import { toast, Zoom } from 'react-toastify';
+
 import { fetchConToken } from '../helpers/fetch';
 import {types} from '../types/types';
 
@@ -23,7 +25,14 @@ export const reguladorStartAddNewAction = ( dataRegulador ) => {
             if ( body.ok) {
                 
                 dispatch( reguladorAddNewAction(dataRegulador) );
-                console.log(body.msg);
+                // console.log(body.msg);
+
+                toast.success(body.msg, {
+                    autoClose: 1500,
+                    position: toast.POSITION.TOP_CENTER,
+                    transition: Zoom,
+                    theme: "colored"
+                });
 
             }else {
                 console.log(body.msg);

@@ -2,6 +2,7 @@ import { types } from '../types/types'
 
 const initialState = {
     data: [],
+    dataSingleTicket: [],
     activeRowTicket: null,
     // sitioTargetTypead: [] 
 }
@@ -24,6 +25,12 @@ export const ticketsReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 data: [ ...action.payload ]
+            }
+
+        case types.ticketSingleGetLoaded:
+            return {
+                ...state,
+                dataSingleTicket: [ ...action.payload ]
             }
 
         case types.ticketSetActive:

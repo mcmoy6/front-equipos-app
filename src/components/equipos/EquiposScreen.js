@@ -27,17 +27,17 @@ import { loadingDeactivateAction } from '../../actions/loadingActions';
 const columns = [
   
   {
-      name: 'S/ Cpu',
+      name: 'S/Cpu',
       selector: row => row.serieCpu,
       sortable: true,
   },
   {
-      name: 'S/ Monitor',
+      name: 'S/Monitor',
       selector: row => row.serieMonitor,
       sortable: true,
   },
   {
-      name: 'S/ No Break',
+      name: 'S/ NoBreak',
       selector: row => row.serieNobreak,
       sortable: true,
   },
@@ -271,6 +271,7 @@ const customStyles = {
 
         <LoadingBar 
             color="#f11946" 
+            height={3}
             ref={ref} 
             shadow={true} 
             loaderSpeed={700}

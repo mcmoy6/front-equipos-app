@@ -1,6 +1,13 @@
+import { toast, Zoom } from 'react-toastify';
+
 import { fetchConToken } from '../helpers/fetch';
 import {types} from '../types/types';
 
+
+export const empleadoSetTargetActiveAction = ( targetActive) => ({
+    type: types.empleadoSetTargetActive,
+    payload: targetActive
+});
 
 export const empleadoStartAddNewAction = ( dataEmpleado ) => {
     return async( dispatch ) => {
@@ -14,7 +21,13 @@ export const empleadoStartAddNewAction = ( dataEmpleado ) => {
             if ( body.ok) {
                 
                 dispatch( empleadoAddNewAction(dataEmpleado) );
-                console.log(body.msg);
+
+                toast.success(body.msg, {
+                    autoClose: 1500,
+                    position: toast.POSITION.TOP_CENTER,
+                    transition: Zoom,
+                    theme: "colored"
+                });
 
             }else {
                 console.log(body.msg);
