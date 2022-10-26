@@ -152,3 +152,18 @@
     font-size: smaller;
 }
 
+div#is-relative{
+    max-width: 420px;
+    position: relative;
+  }
+
+#icon{
+    position: absolute;
+    display: block;
+    bottom: .0rem;
+    right: .1rem;
+  }
+  input.input{
+    padding-right: 2.5rem;
+  }
+

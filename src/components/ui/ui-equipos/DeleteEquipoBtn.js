@@ -1,6 +1,6 @@
 import React from 'react';
 import FeatherIcon from 'feather-icons-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 import { equipoClearRowSelectedAction, equipoStartDeleteAction } from '../../../actions/equiposActions';
@@ -11,8 +11,14 @@ export const DeleteEquipoBtn = () => {
 
     const dispatch = useDispatch();
 
+    const { role } = useSelector( state => state.auth );
+
     const handleDelete = () => {
         // console.log('Eliminado');
+
+        if ( role !== 'ADMIN_ROLE' ) {
+            return console.log('Usted no puede realizar ésta accion, ya que no es administrador');
+        }
 
         Swal.fire({
             title: 'Are you sure?',

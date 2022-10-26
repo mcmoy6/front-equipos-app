@@ -34,10 +34,13 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 
 
 export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_reporte, num_rproveedor, estado, createdAt, updatedAt }) => {
+
   
   const dispatch = useDispatch();
 
   const { activeRowTicket } = useSelector( state => state.tickets );
+
+  const { name } = useSelector( state => state.auth );
 
 
   const ticketDate = moment( createdAt );
@@ -71,6 +74,14 @@ export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_report
 
   }
 
+  const capitalizarPrimeraLetraPalabras = (frase) => {
+     
+    return frase.replace(/\w\S*\s*/g, (palabra) => {
+        return palabra.charAt(0).toUpperCase();
+    });
+    
+}
+
   const StyledTypography = useMemo(() => {
       return withStyles({
         root: {
@@ -92,7 +103,7 @@ export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_report
       >
       <Grid container wrap="nowrap" spacing={2}>
         <Grid item>
-          <Avatar sx={ estado ? { bgcolor: red[400] } : { bgcolor: green[400] } }>JM</Avatar>
+          <Avatar sx={ estado ? { bgcolor: red[400] } : { bgcolor: green[400] } }>{ capitalizarPrimeraLetraPalabras(name) }</Avatar>
         </Grid>
         
         <Grid item xs={12} sm container>

@@ -1,0 +1,25 @@
+.app {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-size:1.7em
+  }
+  code{
+    margin-top:20px
+  }
+  .verde {
+    color:#72c02c;
+    font-weight:900
+  }
+  .rojo {
+    color:#C00;
+    font-weight:900
+  }
+  input[type=text]{
+      font-size:20px;
+      padding:5px;
+      border-radius:5px;
+      width:500px
+  }

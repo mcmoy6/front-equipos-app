@@ -17,9 +17,13 @@ export const startLoginAction = ( email, password ) => {
             localStorage.setItem('token', body.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
 
+            // console.log(body);
+
             dispatch( login({
                 uid: body.id,
-                name: body.nombre
+                name: body.nombre,
+                idSitio: body.id_sitio,
+                role: body.role
             }) );
 
         } else {
@@ -45,7 +49,8 @@ export const startRegisterAction = ( nombre, email, password  ) => {
 
             dispatch( login({
                 uid: body.id,
-                name: body.nombre
+                name: body.nombre,
+                idSitio: body.id_sitio
             }) );
 
         } else {
@@ -75,9 +80,13 @@ export const startCheckingTkAction = () => {
             localStorage.setItem('token', body.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
 
+            // console.log(body);
+
             dispatch( login({
                 uid: body.uid,
-                name: body.name
+                name: body.name,
+                idSitio: body.idSitio,
+                role: body.role
             }) );
 
         } else {
