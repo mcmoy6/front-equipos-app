@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'react-overlay-loader';
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -63,6 +65,12 @@ export const TicketListScreen = () => {
     //     results = data.filter( elemento => elemento.num_reporte.toLowerCase().includes( searchText.toLocaleLowerCase() ) );
     // }
 
+    const noMoreTickets = () => {
+
+        return data.filter( ticket => ticket.num_reporte.toLowerCase().includes( search.toLocaleLowerCase() ) );
+        
+    }
+
     
     const filteredTickets = () => {
 
@@ -79,7 +87,7 @@ export const TicketListScreen = () => {
     const nextPage = (e) => {
         e.preventDefault();
 
-        if ( data.filter( ticket => ticket.num_reporte.toLowerCase().includes( search.toLocaleLowerCase() ) ).length > currentPage + 5 )
+        if ( noMoreTickets().length > currentPage + 5 )
             setCurrentPage( currentPage + 5 );
     }
 
@@ -94,6 +102,7 @@ export const TicketListScreen = () => {
     const onSearchChange = ({ target }) => {
         setCurrentPage(0);
         setSearch( target.value );
+
     }
 
     const resetInput = () => {
@@ -124,15 +133,24 @@ export const TicketListScreen = () => {
 
         <Paper
             component="form"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-            >
+            sx={{ p: '4px 8px', display: 'flex', alignItems: 'center', width: 300 }}
+            variant="outlined"
+        >
+
+        <IconButton sx={{ p: '4px' }} disabled={true} aria-label="menu">
+            <SearchIcon />
+        </IconButton>
+
          <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search Ticket"
             inputProps={{ 'aria-label': 'search ticket' }}
+            name='search'
             value={ search }
             onChange={ onSearchChange }
         />
+
+       
         {
             search.trim().length > 0
 
@@ -146,57 +164,12 @@ export const TicketListScreen = () => {
             
         </Paper>
 
-        
+        <Typography variant="h5" sx={{ p: '24px'}} gutterBottom>
+            Tickets Soporte
+        </Typography>
 
-                    {/* <input 
-                        type="text"
-                        placeholder="Search a ticket"
-                        className="mb-3 form-control"
-                        name="searchText"
-                        value={ search }
-                        onChange={ onSearchChange }
-                        autoComplete="off"
-                    /> */}
-
-                   
-                    <IconButton
-                        aria-label="more"
-                        aria-haspopup="true"
-                        onClick={ prevPage }
-                        sx={{ m: 2 }}
-                        >
-                        <ArrowBackIosIcon />
-                    </IconButton>
-
-                    &nbsp;
-                    
-                    <IconButton
-                        aria-label="more"
-                        aria-haspopup="true"
-                        onClick={ nextPage }
-                        >
-                        <ArrowForwardIosIcon />
-                    </IconButton>
-
-                    {/* {
-                        search.trim().length > 0
-                        &&
-
-                        <span id="icon">
-
-                            <IconButton
-                                aria-label="more"
-                                aria-haspopup="true"
-                                >
-                                <CloseOutlined />
-                            </IconButton>
-
-                        </span>
-                    } */}
-                    
-              
-        
-        <div className='tickets-list'>
+                
+        <div className='tickets-list'>         
 
             <div className="alert alert-danger animate__animated animate__fadeIn" 
                 style={{ display: showError ? '' : 'none' }}>
@@ -206,10 +179,43 @@ export const TicketListScreen = () => {
            
             {
                 filteredTickets().map( value => (
-                    <TicketsItems key={ value.id } { ...value } />
+                    <TicketsItems key={ value.id } { ...value } search={ search } />
                 ))
 
             }
+
+
+            {
+                !showError
+                &&
+                <Paper
+                    component="form"
+                    sx={{ p: '4px 8px', textAlign: 'center' }}
+                    md={{ p: '4px 8px', textAlign: 'center' }}
+                    elevation={0}
+                >  
+                    <IconButton
+                        aria-label="more"
+                        aria-haspopup="true"
+                        disabled={ currentPage === 0 && true}
+                        onClick={ prevPage }
+                        sx={{ m: 2 }}
+                        >
+                        <ArrowBackIosIcon fontSize="small" />
+                    </IconButton>
+                       
+                    <IconButton
+                        aria-label="more"
+                        aria-haspopup="true"
+                        disabled={ noMoreTickets().length < currentPage + 5 && true }
+                        onClick={ nextPage }
+                        sx={{ m: 1 }}
+                        >
+                        <ArrowForwardIosIcon fontSize="small" />
+                    </IconButton>
+                </Paper>       
+            
+            }      
 
             <TicketsAddNewBtn />
 

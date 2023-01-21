@@ -22,6 +22,7 @@ import 'moment/locale/es-mx';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ticketSetActiveAction, ticketStartChangeStatusAction } from '../../actions/ticketsActions';
+import { Highlight } from './Highlight'
 
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -33,8 +34,9 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 
-export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_reporte, num_rproveedor, estado, createdAt, updatedAt }) => {
+export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_reporte, num_rproveedor, estado, createdAt, updatedAt, search }) => {
 
+  // console.log(search);
   
   const dispatch = useDispatch();
 
@@ -123,7 +125,7 @@ export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_report
                 //   }}
                 // >
                   <StyledTypography gutterBottom variant="subtitle1" component="div">
-                  { tipo_reporte }
+                    { tipo_reporte }
                   </StyledTypography>
                 // </Badge>
                 :
@@ -146,7 +148,13 @@ export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_report
               { descripcion }
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                N. Rep: {num_reporte}
+                N. Rep:
+                  <Highlight
+                    children={ num_reporte }
+                    toHighlight={ search } 
+                  />
+
+                
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Prov: { num_rproveedor }
@@ -161,7 +169,7 @@ export const TicketsItems = ({ id, equipo, tipo_reporte, descripcion, num_report
            
 
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2} md={1}>
             <IconButton
              aria-label="more"
              aria-controls={open ? 'basic-menu' : undefined}

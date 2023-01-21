@@ -126,6 +126,11 @@ export const ticketClearSetActiveAction = () => ({
     type: types.ticketClearActive
 });
 
+export const ticketToHighlightAction = ( toHighlight ) => ({
+    type: types.ticketToHighlight,
+    payload: toHighlight
+});
+
 export const uiOpenModalTicketAction = () => ({
     type: types.uiOpenModalTicket
 });

@@ -5,6 +5,12 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 // import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
 
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+
 import 'react-data-table-component-extensions/dist/index.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import { empeladosStartLoadingAction } from '../../actions/empleadosActions';
@@ -167,9 +173,242 @@ const customStyles = {
     },
 };
 
-  
   // data provides access to your row data
-  const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
+  // const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
+
+  const ExpandedComponent = ({ data }) => (
+
+    <Card sx={{ maxWidth: 325, my: 1, mx: 1 }}>
+      <CardContent>
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Id Sitio: 
+            </Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Typography variant='body2' align='inherit' gutterBottom>
+            {data.sitio}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Sitio: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.denomSitio}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Fuap: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.fuap}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              S/ CPU: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.serieCpu}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              S/ Monitor: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.serieMonitor}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              S/ NoBreak: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.serieNobreakAnt}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              IP: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.ip}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Host: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.nombreEquipo}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              C. User: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.cuenta}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Nombre: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {`${data.apellidos} ${data.nombreUsuario}`}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Puesto: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.puesto}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Área: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.area}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Extensión: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.extension}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Mail: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.email}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Obs: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' color="text.secondary" gutterBottom>
+            {data.observaciones}
+            </Typography>
+          </Grid>
+        </Grid>
+             
+      </CardContent>
+      
+    </Card>
+
+  );
 //   const ExpandedComponent = ({ data }) => (<div className='expanded-component_computer'>
         
 //     <table className="table table-hover">

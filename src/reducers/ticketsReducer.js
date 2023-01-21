@@ -4,6 +4,7 @@ const initialState = {
     data: [],
     dataSingleTicket: [],
     activeRowTicket: null,
+    dataToHighlight: ''
     // sitioTargetTypead: [] 
 }
 
@@ -31,6 +32,12 @@ export const ticketsReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 dataSingleTicket: [ ...action.payload ]
+            }
+
+        case types.ticketToHighlight:
+            return {
+                ...state,
+                dataToHighlight: [ ...action.payload ]
             }
 
         case types.ticketSetActive:

@@ -44,48 +44,69 @@ export const HomeScreen = () => {
         <DashboardLoader />
         :
         <div className="container">
-          <div className="row">
-              <div className="col-md-4 col-xl-3">
-                  <div className="card bg-c-blue order-card">
-                      <div className="card-block">
-                          <h6 className="m-b-20">Equipos de Cómputo</h6>
-                          <h2 className="text-end"><i className="fa fa-desktop f-left"></i><span>196</span></h2>
-                          <p className="m-b-0">Completed Orders<span className="f-right">351</span></p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div className="col-md-4 col-xl-3">
-                  <div className="card bg-c-green order-card">
-                      <div className="card-block">
-                          <h6 className="m-b-20">Impresoras</h6>
-                          <h2 className="text-end"><i className="fa fa-print f-left"></i><span>60</span></h2>
-                          <p className="m-b-0">Completed Orders<span className="f-right">351</span></p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div className="col-md-4 col-xl-3">
-                  <div className="card bg-c-yellow order-card">
-                      <div className="card-block">
-                          <h6 className="m-b-20">Tickets Soporte</h6>
-                          <h2 className="text-end"><i className="fa fa-check f-left"></i><span>486</span></h2>
-                          <p className="m-b-0">Completed Orders<span className="f-right">351</span></p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div className="col-md-4 col-xl-3">
-                  <div className="card bg-c-pink order-card">
-                      <div className="card-block">
-                          <h6 className="m-b-20">Others</h6>
-                          <h2 className="text-end"><i className="fa fa-cog f-left"></i><span>486</span></h2>
-                          <p className="m-b-0">Completed Orders<span className="f-right">351</span></p>
-                      </div>
-                  </div>
-              </div>
+            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+                <div className="col">
+                    <div className="card item radius-10 border-0 border-3 item--1">
+                        <div className="card-body">
+                            <div className="d-flex align-items-center">
+                                <div>
+                                    {/* <p className="mb-0 text-secondary">Total Computers</p> */}
+                                    <h4 className="my-1 text-white">199</h4>
+                                    <p className="mb-0 text--1">Total Computers</p>
+                                </div>
+                                <div className="widgets-icons-2 text-white ms-auto"><i className="fa fa-desktop text--1" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col">
+                    <div className="card item radius-10 border-0 border-3 item--2">
+                    <div className="card-body">
+                        <div className="d-flex align-items-center">
+                            <div>
+                                {/* <p className="mb-0 text-secondary">Total Printers</p> */}
+                                <h4 className="my-1 text-white">60</h4>
+                                <p className="mb-0 text--2">Total Printers</p>
+                            </div>
+                            <div className="widgets-icons-2 text-white ms-auto"><i className="fa fa-print text--2" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div className="col">
+                    <div className="card item radius-10 border-0 border-3 item--3">
+                    <div className="card-body">
+                        <div className="d-flex align-items-center">
+                            <div>
+                                <h4 className="my-1 text-white">125</h4>
+                                <p className="mb-0 text--3">Tickets</p>
+                                {/* <p className="mb-0 font-13">+8.4% from last week</p> */}
+                            </div>
+                            <div className="widgets-icons-2 text-white ms-auto"><i className="fa fa-check text--3"></i>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div> 
+                <div className="col">
+                    <div className="card item radius-10 border-0 border-3 item--4">
+                    <div className="card-body">
+                        <div className="d-flex align-items-center">
+                            <div>
+                                <h4 className="my-1 text-white">8.4K</h4>
+                                <p className="mb-0 text--4">Total Users</p>
+                                {/* <p className="mb-0 font-13">-4.5% from last week</p> */}
+                            </div>
+                            <div className="widgets-icons-2 text-white ms-auto"><i className="fa fa-users text--4"></i>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
       }
 
     </>

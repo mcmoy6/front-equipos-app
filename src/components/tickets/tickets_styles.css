@@ -167,3 +167,8 @@ div#is-relative{
     padding-right: 2.5rem;
   }
 
+  mark { 
+    background-color: rgb(255, 255, 106);
+    color: black;
+  }
+

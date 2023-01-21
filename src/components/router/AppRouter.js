@@ -9,7 +9,7 @@ import { DashboardRoutes } from './DashboardRoutes';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
-
+import './loader.css';
 
 export const AppRouter = () => {
 
@@ -22,7 +22,12 @@ export const AppRouter = () => {
     }, [dispatch]);
 
     if (checking) {
-        return (<h5>Espere...</h5>);
+        return (
+            <div className="contenedor">
+
+                <div className="loader"></div>
+            </div>
+        );
     }
 
   return (

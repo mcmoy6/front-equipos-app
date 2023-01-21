@@ -77,6 +77,7 @@ export const types = {
     ticketClearActive: '[tickets] Ticket clear active',
     ticketsAddNew: '[tickets] Ticket add new',
     ticketChangeStatus: '[tickets] Ticket change status',
+    ticketToHighlight: '[tickets] Ticket to resaltar',
 
     printersGetLoaded: '[printers] Printers get loaded',
     printerAddNew: '[printers] Printers add new',
