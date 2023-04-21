@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LoadingBar from 'react-top-loading-bar';
-import { DashboardLoader } from '../../loaders/DashboardLoader';
+import { ProductDetails } from '../../loaders/ProductDetails';
+import { useScreenSize } from '../../hooks/useScreenSize';
+// import { ProfileShow } from '../../loaders/ProfileShow';
+
 // import { Typography }  from '@mui/material';
 
 import './home-styles.css';
@@ -8,6 +11,9 @@ import './home-styles.css';
 export const HomeScreen = () => {
 
   const [ mostrarCardTable, setMostrarCardTable ] = useState(true);
+
+  const { width, height } = useScreenSize();
+  
 
    // BARRA LOADING
    const ref = useRef(null);
@@ -19,12 +25,13 @@ export const HomeScreen = () => {
     
   useEffect( () => {
       // setShow(true);
+      console.log(`width: ${width}, height: ${height}`);
       setTimeout(() => {
           // setShow(false);
           setMostrarCardTable(false);
       }, 1000);
 
-    }, []);
+    }, [width, height]);
 
   return (
     <>
@@ -41,7 +48,7 @@ export const HomeScreen = () => {
       {
         mostrarCardTable
         ?
-        <DashboardLoader />
+        <ProductDetails />
         :
         <div className="container">
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4">

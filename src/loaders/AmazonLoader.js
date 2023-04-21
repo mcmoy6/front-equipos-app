@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-const AmazonLoader = props => {
+export const AmazonLoader = props => {
   return (
     <ContentLoader viewBox="0 0 800 400" height={400} width={800} {...props}>
       <circle cx="472" cy="159" r="7" />

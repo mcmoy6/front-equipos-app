@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-const ProfileCard = props => {
+export const ProfileCard = props => {
   return (
     <ContentLoader
       speed={1}

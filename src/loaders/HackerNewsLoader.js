@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-const HackerNewsLoader = props => (
+export const HackerNewsLoader = props => (
   <ContentLoader
     speed={1}
     width={340}

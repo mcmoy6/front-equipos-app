@@ -38,7 +38,7 @@ export const startRegisterAction = ( nombre, email, password  ) => {
         const resp = await fetchSinToken('auth/new', { email, password, nombre }, 'POST');
         const body = await resp.json();
 
-        //  console.log(body);
+        //  console.loKUg(body);
 
         if ( body.ok ) {
 
