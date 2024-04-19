@@ -3,6 +3,9 @@ import DataTable, { createTheme } from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-data-table-component-extensions/dist/index.css'; 
+import { ToastContainer  } from 'react-toastify';
+import { CSVLink } from "react-csv";
+
 // import FeatherIcon from 'feather-icons-react';
 // import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
@@ -21,6 +24,7 @@ import { PrinterModalNew } from './PrinterModalNew';
 import { printerClearActiveAction, printerSetActiveAction, printersStartLoadingAction } from '../../actions/printersActions';
 import { BootstrapCardDataTable } from '../../loaders/BootstrapCardDataTable';
 import { PrinterModalEdit } from './PrinterModalEdit';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 // const StyledCheckbox = withStyles({
 //     root: {
@@ -57,6 +61,11 @@ createTheme('solarized', {
 
 const columns = [
     {
+        name: 'Ubicación',
+        selector: row => row.ubicacion,
+        sortable: true,
+    },
+    {
         name: 'Serie',
         selector: row => row.serie,
         sortable: true,
@@ -70,11 +79,6 @@ const columns = [
         name: 'Modelo',
         selector: row => row.modelo,
         sortable: true,
-    },
-    {
-        name: 'Ubicación',
-        selector: row => row.ubicacion,
-        sortable: true,
     }
     
 ];
@@ -84,6 +88,7 @@ export const PrinterScreen = () => {
     
 
     // const [showSubHeader, setSowSubHeader] = useState(false)
+    const { width } = useScreenSize();
 
     const [ mostrarCardTable, setMostrarCardTable ] = useState(true);
     
@@ -273,7 +278,12 @@ export const PrinterScreen = () => {
     //         <AddIcon />
     //     </IconButton>
     // );
-
+    const paginationComponentOptions = {
+        	rowsPerPageText: 'Filas por página',
+        	rangeSeparatorText: 'de',
+        	selectAllRowsItem: true,
+        	selectAllRowsItemText: 'Todos',
+        };
     
     return (
         <div>
@@ -282,6 +292,11 @@ export const PrinterScreen = () => {
                 fullPage 
                 loading={show}
             /> */}
+
+            <ToastContainer
+                enableMultiContainer
+                containerId={"anId"}
+            />
 
             <LoadingBar 
                 color="#f11946" 
@@ -299,39 +314,48 @@ export const PrinterScreen = () => {
                 <BootstrapCardDataTable />
 
                 :
+                <>
+                    <div className="btn-group float-right" role="group" aria-label="Basic mixed styles example">
+                        <CSVLink className='btn btn-success btn-success-group' data={data} filename={"inventario-impresoras.csv"}>CSV</CSVLink>
+                    </div>
 
-                <DataTableExtensions
-                    {...tableData}
-                    export={false}
-                    print={false}
-                >
-                    <DataTable
-                        title="Equipos de Impresión"
-                        // clearSelectedRows={ rowClearSelected }
-                        actions={activeRowPrinter && contextActions}
-                        conditionalRowStyles={conditionalRowStyles}
-                        contextActions={contextActions}
-                        customStyles={customStyles}
-                        expandableRows
-                        expandableRowsComponent={ExpandedComponent}
-                        highlightOnHover
-                        noContextMenu
-                        onRowClicked={ onRowClicked }
-                        onSelectedRowsChange={handleRowSelected}
-                        pagination    
-                        responsive={ true }
-                        selectableRows
-                        fixedHeader={true}
-                        fixedHeaderScrollHeight='390px'
-                        // selectableRowsComponent={StyledCheckbox}
-                        selectableRowsHighlight={true}
-                        selectableRowsSingle
-                        // subHeader={showSubHeader}
-                        // subHeaderAlign={'left'}
-                        // subHeaderComponent={ activeRowPrinter && contextActions }
-                    />
+                    <DataTableExtensions
+                        {...tableData}
+                        export={false}
+                        print={false}
+                    >
+                        
 
-                </DataTableExtensions>
+                        <DataTable
+                            title="Equipos de Impresión"
+                            // clearSelectedRows={ rowClearSelected }
+                            actions={activeRowPrinter && contextActions}
+                            conditionalRowStyles={conditionalRowStyles}
+                            contextActions={contextActions}
+                            customStyles={customStyles}
+                            expandableRows
+                            expandableRowsComponent={ExpandedComponent}
+                            highlightOnHover
+                            noContextMenu
+                            onRowClicked={ onRowClicked }
+                            onSelectedRowsChange={handleRowSelected}
+                            pagination    
+                            paginationComponentOptions={paginationComponentOptions}
+                            responsive={ true }
+                            selectableRows
+                            fixedHeader={true}
+                            fixedHeaderScrollHeight={`${width <= 767 && '450px'}`}
+                            // selectableRowsComponent={StyledCheckbox}
+                            selectableRowsHighlight={true}
+                            selectableRowsSingle
+                            // subHeader={showSubHeader}
+                            // subHeaderAlign={'left'}
+                            // subHeaderComponent={ activeRowPrinter && contextActions }
+                        />
+
+                    </DataTableExtensions>
+                </>
+
             }
 
 

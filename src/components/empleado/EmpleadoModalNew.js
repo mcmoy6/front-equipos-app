@@ -69,6 +69,14 @@ export const EmpleadoModalNew = () => {
             
     }
 
+    const handleKeyPresChange = ({target}) => {
+
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value.toUpperCase()
+        });
+    }
+
     useEffect( () => {
         if (custOption) {
             setTimeout(() => {
@@ -181,6 +189,7 @@ export const EmpleadoModalNew = () => {
                                 name="nombre"
                                 value={nombre}
                                 onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
                                 ref={inputRefName}
                             />
                         </div>
@@ -196,6 +205,7 @@ export const EmpleadoModalNew = () => {
                                 name="apellido_pat"
                                 value={apellido_pat}
                                 onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
                             />
                             </div>
                         </div>
@@ -209,6 +219,7 @@ export const EmpleadoModalNew = () => {
                                 name="apellido_mat"
                                 value={apellido_mat}
                                 onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
                             />
                         </div>
                     </div>
@@ -228,6 +239,7 @@ export const EmpleadoModalNew = () => {
                             name="denom_puesto"
                             value={denom_puesto}
                             onChange={ handleRegisterInputChange }
+                            onKeyUp={ handleKeyPresChange }
                         />
                         </div>
                     </div>
@@ -241,6 +253,7 @@ export const EmpleadoModalNew = () => {
                             name="denom_servicio"
                             value={denom_servicio}
                             onChange={ handleRegisterInputChange }
+                            onKeyUp={ handleKeyPresChange }
                         />
                         </div>
                     </div>
@@ -263,7 +276,7 @@ export const EmpleadoModalNew = () => {
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">@</span>
                     <input 
-                        type="text" 
+                        type="email" 
                         className="form-control" 
                         placeholder="email" 
                         name="email"

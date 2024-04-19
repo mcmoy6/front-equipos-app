@@ -25,7 +25,7 @@ export const HomeScreen = () => {
     
   useEffect( () => {
       // setShow(true);
-      console.log(`width: ${width}, height: ${height}`);
+    //   console.log(`width: ${width}, height: ${height}`);
       setTimeout(() => {
           // setShow(false);
           setMostrarCardTable(false);

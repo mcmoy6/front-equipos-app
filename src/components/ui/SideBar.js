@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemText, ListItemButton, ListItemIcon, Toolbar, Typography } from '@mui/material'
-import { Computer, Dashboard, PrintRounded, SupportAgentRounded } from '@mui/icons-material';
+import { Computer, Dashboard, PrintRounded, SupportAgentRounded, ContactMailRounded, MonitorHeartRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiMovilOpenMenuAction } from '../../actions/equiposActions';
@@ -51,6 +51,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 display: { xs: 'block' },
                 '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
             }}
+            // anchor='right'
         >
             <Toolbar>
                 <Typography variant='h6' noWrap component='div'>
@@ -95,6 +96,22 @@ export const SideBar = ({ drawerWidth = 240 }) => {
 
                 <ListItem disablePadding>
                     <ListItemButton 
+                        selected={selectedIndex === '/imagenologia'}
+                        onClick={ (event) => handleDrawerToggle(event, '/imagenologia') }
+                    >
+                        <ListItemIcon>
+                            <MonitorHeartRounded />
+                        </ListItemIcon>
+                        <Grid container>
+                            <Link style={{ textDecoration: 'none', color: 'inherit'}} to={`/imagenologia`}>
+                                <ListItemText primary='Imagenología' />
+                            </Link>
+                        </Grid>
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                    <ListItemButton 
                         selected={selectedIndex === '/impresoras'}
                         onClick={ (event) => handleDrawerToggle(event, '/impresoras') }
                     >
@@ -124,17 +141,34 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                         </Grid>
                     </ListItemButton>
                 </ListItem>
+
+                <ListItem disablePadding>
+                    <ListItemButton 
+                        selected={ selectedIndex === '/cuentas' }
+                        onClick={ (event) => handleDrawerToggle(event, '/cuentas') }
+                    >
+                        <ListItemIcon>
+                            <ContactMailRounded />
+                        </ListItemIcon>
+                        <Grid container>
+                            <Link style={{ textDecoration: 'none', color: 'inherit'}} to={`/cuentas`}>
+                                <ListItemText primary='Cuentas Inst.' />
+                            </Link>
+                        </Grid>
+                    </ListItemButton>
+                </ListItem>
                    
             </List>
 
         </Drawer>
         <Drawer
           variant="permanent"
+          onClose={handleDrawerToggle}
           sx={{
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
-          open
+        //   open
         >
 
         <Toolbar>
@@ -176,6 +210,23 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                         </Grid>
                     </ListItemButton>
                 </ListItem>
+
+                <ListItem  disablePadding>
+                    <ListItemButton 
+                            selected={selectedIndex === '/imagenologia'}
+                            onClick={(event) => handleListItemClick(event, '/imagenologia')}
+                        >
+                        <ListItemIcon>
+                            <MonitorHeartRounded />
+                        </ListItemIcon>
+                        <Grid container>
+                            <Link style={{ textDecoration: 'none', color: 'inherit'}} to={`/imagenologia`}>
+                                Eq. Imagenología
+                            </Link>
+                        </Grid>
+                    </ListItemButton>
+                </ListItem>
+
                 <ListItem  disablePadding>
                     <ListItemButton 
                         selected={selectedIndex === '/impresoras'} 
@@ -206,6 +257,23 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                         </Grid>
                     </ListItemButton>
                 </ListItem>
+                <ListItem  disablePadding>
+                    <ListItemButton 
+                        selected={selectedIndex === '/cuentas'}
+                        onClick={(event) => handleListItemClick(event, '/cuentas')}
+                    >
+                        <ListItemIcon>
+                            <ContactMailRounded />
+                        </ListItemIcon>
+                        <Grid container>
+                            <Link style={{ textDecoration: 'none', color: 'inherit'}} to={`/cuentas`}>
+                                Cuentas Inst.
+                            </Link>
+                        </Grid>
+                    </ListItemButton>
+                </ListItem>
+
+                <Divider />
 
             </List>
 

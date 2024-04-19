@@ -1,6 +1,7 @@
-import { types } from "../types/types";
 import { fetchConToken } from '../helpers/fetch';
+import { Slide, toast, Zoom } from 'react-toastify';
 
+import { types } from "../types/types";
 
 
 export const uiOpenModaPrinterlAction = () => ({
@@ -42,6 +43,7 @@ export const printersStartLoadingAction = () => {
             //console.log(equiposComp);
             dispatch( printersLoadedAction( equiposImpr ) );
             
+            
         } catch (error) {
             console.log(error);
         }
@@ -64,11 +66,52 @@ export const printerStartAddNewAction = ( impresora ) => {
             const body = await resp.json();
 
             if ( body.ok) {
+
                 impresora.id = body.impresoraData.id
                 dispatch( printerAddNewAction(impresora) );
 
+                toast.success(body.msg, {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_RIGHT,
+                    containerId: "anId",
+                    transition: Zoom,
+                    theme: "colored"
+                });
+
+                dispatch( uiCloseModalPrinterAction() );
+
+                dispatch( printerClrValidaFormAction() );
+
             }else {
-                console.log(body.msg);
+                // console.log(body.msg);
+                toast.error(body.msg, {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_RIGHT,
+                    containerId: "anId2",
+                    transition: Slide,
+                    theme: "dark"
+                });
+
+                toast.error(body.errors[0].msg, {
+                    autoClose: 3000,
+                    position: toast.POSITION.TOP_RIGHT,
+                    containerId: "anId2",
+                    transition: Slide,
+                    theme: "dark",
+                    // onClose: () => {
+                    //     dispatch( uiCloseModalCuentaAction() );
+                    // }
+                });
+
+                const parametro = body.errors[0].param;
+
+                if ( parametro ) {
+                    
+                    dispatch( printerValidaFormAction( parametro ) );
+
+                }
+
+
             }
             
         } catch (error) {
@@ -81,6 +124,15 @@ export const printerStartAddNewAction = ( impresora ) => {
 const printerAddNewAction = ( impresora ) => ({
     type: types.printerAddNew,
     payload: impresora
+});
+
+const printerValidaFormAction = ( param ) => ({
+    type: types.printerValidaForm,
+    payload: param
+});
+
+export const printerClrValidaFormAction = () => ({
+    type: types.printerClearValidaForm
 });
 
 export const printerStartUpdateAction = ( impresora ) => {

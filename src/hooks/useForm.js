@@ -5,8 +5,8 @@ export const useForm = (initialState = {}) => {
     const [values, setValues] = useState(initialState);
 
     // Para resetear el formulario
-    const reset = (row) => {
-        setValues(row);
+    const reset = () => {
+        setValues(initialState);
     }
 
     const handleInputChange = ({target}) => {
@@ -21,7 +21,15 @@ export const useForm = (initialState = {}) => {
        });
     }
 
+    const handleKeyPresChange = ({target}) => {
+        setValues({
+
+            ...values,
+            [target.name]: target.value.toUpperCase()
+        });
+    }
+
     // retorna values y handleInputChange y los recibe FormWithCustomHook
-    return [ values, handleInputChange, reset ];
+    return [ values, handleInputChange, reset, handleKeyPresChange ];
 
 }

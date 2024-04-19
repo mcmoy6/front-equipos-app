@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import { CloseOutlined } from '@mui/icons-material';
 
-import { equiposStartUpdateAction, uiCloseModalEditEquAction, uiOpenModalEmpleadoAction } from '../../actions/equiposActions';
+import { equipoClearSetActiveAction, equiposStartUpdateAction, uiCloseModalEditEquAction, uiOpenModalEmpleadoAction } from '../../actions/equiposActions';
 
 
 import './equipos-styles.css';
@@ -36,9 +36,11 @@ Modal.setAppElement('#root');
     serieCpu: '',
     serieMonitor: '',
     serieNobreak: '',
+    serieCandado: '',
     ip: '',
     nombreEquipo: '',
     cuenta: '',
+    aplicativoInst: '',
     nombreUsuario: '',
     apellidos: '',
     puesto: '',
@@ -78,9 +80,11 @@ export const EquiposModalEdit = () => {
                 serieCpu,
                 serieMonitor,
                 serieNobreak,
+                serieCandado,
                 ip,
                 nombreEquipo,
                 cuenta,
+                aplicativoInst,
                 nombreUsuario,
                 apellidos,
                 puesto,
@@ -124,6 +128,14 @@ export const EquiposModalEdit = () => {
                 [target.name]: target.value,
             });
             
+    }
+
+    const handleKeyPresChange = ({target}) => {
+
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value.toUpperCase()
+        });
     }
 
     const handleSitioSelected = (event) => {
@@ -229,7 +241,7 @@ export const EquiposModalEdit = () => {
          dispatch( empleadoClearActiveEditAction() );
          dispatch( sitiosClearLoadedAction() );
 
-        //  dispatch( equipoClearSetActiveAction() );
+         dispatch( equipoClearSetActiveAction() );
         //  dispatch( equipoClearTargetActiveAction() );
 
     }
@@ -247,343 +259,401 @@ export const EquiposModalEdit = () => {
             overlayClassName="modal-fondo"
         > 
 
-        <IconButton
-            size='small'
-            onClick={ closeModal }
-            sx={{
-                color: 'black',
-                backgroundColor: 'white',
-                ':hover': { backgroundColor: 'white', opacity: 0.9 },
-                position: 'fixed',
-                right: { xs: 20, sm: 15, md:15, lg:15 },
-                top: { xs: 3, sm: 5, md:5, lg:5 },
-                
-            }}
-            >
-            <CloseOutlined sx={{ fontSize: 25 }} />
-        </IconButton>
+        
 
-        <h5> ACTUALIZAR EQUIPO </h5>
-        <hr />
+        <nav>
+            <h5>ACTUALIZAR EQUIPO</h5>
 
-        <form className="container" onSubmit={ handleSubmitForm } id="formModal" >
-        <label className="form-label">Datos del Sitio</label>
-            <div className="row g-3 mb-3">
-                <div className="col-sm-4">
-                    <div className="input-group">
-                        <div className="input-group-text">ID. SITIO</div>
-                        <Typeahead
-                            id="basic-typeahead-sitios"
-                            // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
-                            labelKey="id_sitio"
-                            // newSelectionPrefix="Agregar nvo: "
-                            onChange={handleSitioSelected}
-                            options={sitiosData}
-                            selected={sitioSingleSeletions}
-                            // allowNew
-                            minLength={2}
-                            renderMenuItemChildren={(option) => (
-                                <div>
-                                    {option.id_sitio}
-                                    <div>
-                                        <small>
-                                            Sitio: {option.denominacion_sitio}
-                                        </small>
-                                    </div>
-                                </div>
-                                )}
-                            // ref={refAutoComplete}
-                        />
-                        {/* <input 
-                            type="text" 
-                            autoFocus
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="ID del sitio" 
-                            name="sitio"
-                            value={sitio}
-                            onChange={ handleRegisterInputChange }
-                        /> */}
-                    </div>
-                </div>
-                <div className="col-sm-8">
-                    <div className="input-group">
-                        <div className="input-group-text">DENOM. SITIO</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Denominación del Sitio" 
-                            name="denomSitio"
-                            value={denomSitio}
-                            onChange={ handleRegisterInputChange }
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <hr />
-            
-            <label className="form-label">Datos del Equipo</label>
-
-                <div className="row g-3 mb-3">
-                    <div className="col-sm-8">
-                        <div className="input-group">
-                            <div className="input-group-text">FUAP</div>
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                aria-label="Username" 
-                                aria-describedby="basic-addon1" 
-                                name="fuap"
-                                value={ fuap }
-                                onChange={ handleRegisterInputChange }
-                            />
-                        </div>
-                    </div>
-                </div>
-                
-
-                <div className="row g-3 mb-3">
+            <IconButton
+                size='small'
+                onClick={ closeModal }
+                sx={{
+                    color: 'black',
+                    backgroundColor: 'white',
+                    ':hover': { backgroundColor: 'white', opacity: 0.9 },
+                    position: 'fixed',
+                    right: { xs: 20, sm: 15, md:15, lg:15 },
+                    top: { xs: 3, sm: 5, md:5, lg:5 },
                     
+                }}
+                >
+                <CloseOutlined sx={{ fontSize: 25 }} />
+            </IconButton>
+        </nav>
+
+        <div className="scroll-container">
+            <form className="container" onSubmit={ handleSubmitForm } id="formModal" >
+            <label className="form-label">Datos del Sitio</label>
+                <div className="row g-3 mb-3">
                     <div className="col-sm-4">
                         <div className="input-group">
-                            <div className="input-group-text">CPU</div>
+                            <div className="input-group-text">ID. SITIO</div>
+                            <Typeahead
+                                id="basic-typeahead-sitios"
+                                // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
+                                labelKey="id_sitio"
+                                // newSelectionPrefix="Agregar nvo: "
+                                onChange={handleSitioSelected}
+                                options={sitiosData}
+                                selected={sitioSingleSeletions}
+                                // allowNew
+                                minLength={2}
+                                renderMenuItemChildren={(option) => (
+                                    <div>
+                                        {option.id_sitio}
+                                        <div>
+                                            <small>
+                                                Sitio: {option.denominacion_sitio}
+                                            </small>
+                                        </div>
+                                    </div>
+                                    )}
+                                // ref={refAutoComplete}
+                            />
+                            {/* <input 
+                                type="text" 
+                                autoFocus
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="ID del sitio" 
+                                name="sitio"
+                                value={sitio}
+                                onChange={ handleRegisterInputChange }
+                            /> */}
+                        </div>
+                    </div>
+                    <div className="col-sm-8">
+                        <div className="input-group">
+                            <div className="input-group-text">DENOM. SITIO</div>
                             <input 
                                 type="text" 
                                 className="form-control" 
                                 id="specificSizeInputGroupUsername" 
-                                placeholder="Serie del CPU" 
-                                name="serieCpu"
-                                value={serieCpu}
+                                placeholder="Denominación del Sitio" 
+                                name="denomSitio"
+                                value={denomSitio}
                                 onChange={ handleRegisterInputChange }
                             />
                         </div>
                     </div>
-
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Monitor</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Serie del monitor" 
-                            name="serieMonitor"
-                            value={serieMonitor}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Ups</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Serie del UPS" 
-                            name="serieNobreak"
-                            value={serieNobreak}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="row g-3 mb-3">
-                    
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">IP</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Ej 192.160.206.109" 
-                            name="ip"
-                            value={ip}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Nom. Eq.</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Nombre del equipo" 
-                            name="nombreEquipo"
-                            value={nombreEquipo}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Cuenta</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Cuenta de usuario" 
-                            name="cuenta"
-                            value={cuenta}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-
                 </div>
 
                 <hr />
                 
-                <label className="form-label">Datos del Empleado</label>
+                <label className="form-label">Datos del Equipo</label>
 
-                <div className="row g-3 mb-3">
-                        <div className="input-group">
-                        <span className="input-group-text">Num. Empleado:</span>
-                            <Typeahead
-                                id="basic-typeahead-single"
+                    <div className="row g-3 mb-3">
+                        <div className="col-sm-8">
+                            <div className="input-group">
+                                <div className="input-group-text">FUAP</div>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    aria-label="Username" 
+                                    aria-describedby="basic-addon1" 
+                                    name="fuap"
+                                    value={ fuap }
+                                    onChange={ handleRegisterInputChange }
+                                    onKeyUp={ handleKeyPresChange }
+                                />
+                            </div>
+                        </div>
+
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                                <div className="input-group-text">Candado</div>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    aria-label="Username" 
+                                    aria-describedby="basic-addon1" 
+                                    name="serieCandado"
+                                    value={ serieCandado }
+                                    onChange={ handleRegisterInputChange }
+                                    onKeyUp={ handleKeyPresChange }
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div className="row g-3 mb-3">
+                        
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                                <div className="input-group-text">CPU</div>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    id="specificSizeInputGroupUsername" 
+                                    placeholder="Serie del CPU" 
+                                    name="serieCpu"
+                                    value={serieCpu}
+                                    onChange={ handleRegisterInputChange }
+                                    onKeyUp={ handleKeyPresChange }
+                                />
+                            </div>
+                        </div>
+
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">Monitor</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Serie del monitor" 
+                                name="serieMonitor"
+                                value={serieMonitor}
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">Ups</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Serie del UPS" 
+                                name="serieNobreak"
+                                value={serieNobreak}
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="row g-3 mb-3">
+                        
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">IP</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Ej 192.160.206.109" 
+                                name="ip"
+                                value={ip}
+                                onChange={ handleRegisterInputChange }
+                            />
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">Nom. Eq.</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Nombre del equipo" 
+                                name="nombreEquipo"
+                                value={nombreEquipo}
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">Cuenta</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Cuenta de usuario" 
+                                name="cuenta"
+                                value={cuenta}
+                                onChange={ handleRegisterInputChange }
+                            />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="row g-3 mb-3">
+                        <div className="col-sm-8">
+                            <div className="input-group">
+                                <div className="input-group-text">Aplicativo Inst</div>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    aria-label="Username" 
+                                    aria-describedby="basic-addon1" 
+                                    name="aplicativoInst"
+                                    value={ aplicativoInst }
+                                    onChange={ handleRegisterInputChange }
+                                    onKeyUp={ handleKeyPresChange }
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    
+                    <label className="form-label">Datos del Empleado</label>
+
+                    <div className="row g-3 mb-3">
+                            <div className="input-group">
+                            <span className="input-group-text">Num. Empleado:</span>
+                                <Typeahead
+                                    id="basic-typeahead-single"
+                                    
+                                    labelKey="label"
+                                    newSelectionPrefix="Agregar nvo: "
+                                    onChange={handleSelected}
+                                    options={data}
+                                    selected={singleSelections}
+                                    allowNew={true}
+                                    renderMenuItemChildren={(option) => (
+                                        <div>
+                                        {option.label}
+                                        <div>
+                                            <small>Nom: {option.nombre+' '+option.apellido_pat} - Puesto: {option.denom_puesto}</small>
+                                        </div>
+                                        </div>
+                                    )}
+                                    ref={refAutoCompleteEdit}
+                                />
+                            </div>
+                    </div>
+
+                    <div className="row g-3 mb-3">
+                        <div className="col-sm-6">
+                            <div className="input-group">
+                                <span className="input-group-text">Nombre</span>
+                                <input 
+                                    type="text" 
+                                    aria-label="First name" 
+                                    className="form-control" 
+                                    placeholder="Nombre(s)" 
+                                    name="nombreUsuario"
+                                    value={activeRowEdit ? activeRowEdit.nombre : nombreUsuario}
+                                    onChange={ handleRegisterInputChange }
+                                    ref={inputNameRefEdit}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-sm-6">
+                            <div className="input-group">
+                            <span className="input-group-text">Apellidos</span>
+                                <input 
+                                    type="text" 
+                                    aria-label="Last name" 
+                                    className="form-control" 
+                                    placeholder="Apellidos"
+                                    name="apellidos"
+                                    value={activeRowEdit ? activeRowEdit.apellido_pat +' '+activeRowEdit.apellido_mat : apellidos}
+                                    onChange={ handleRegisterInputChange }
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+
+                    <div className="row g-3 mb-3">
+                        
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">Puesto</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                name="puesto"
+                                value={activeRowEdit ? activeRowEdit.denom_puesto : puesto}
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">Área</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername"
+                                name="area"
+                                value={activeRowEdit ? activeRowEdit.denom_servicio : area}
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
+                            <div className="input-group">
+                            <div className="input-group-text">Extensión</div>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                name="extension"
+                                value={activeRowEdit ? activeRowEdit.extension : extension}
+                                onChange={ handleRegisterInputChange }
+                            />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="input-group mb-3">
+                        <span className="input-group-text" id="basic-addon1">@</span>
+                        <input 
+                            type="email" 
+                            className="form-control" 
+                            placeholder="email" 
+                            name="email"
+                            value={activeRowEdit ? activeRowEdit.email : email}
+                            onChange={ handleRegisterInputChange }
+                        />
+                    </div>
+
+                    <div className="row g-3 mb-3">
+
+                    <div className="input-group">
+
+                            <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+                            <div className="input-group">
+                                <span className="input-group-text">Observaciones</span>
+                                <textarea 
+                                    className="form-control" 
+                                    aria-label="With textarea"
+                                    name="observaciones"
+                                    value={observaciones}
+                                    onChange={ handleRegisterInputChange }
+                                    ref={inputObservRefEdit}
+                                ></textarea>
+                            </div>
+
+                    </div>
+
+                            
+                            <div className="input-group">
                                 
-                                labelKey="label"
-                                newSelectionPrefix="Agregar nvo: "
-                                onChange={handleSelected}
-                                options={data}
-                                selected={singleSelections}
-                                allowNew={true}
-                                renderMenuItemChildren={(option) => (
-                                    <div>
-                                      {option.label}
-                                      <div>
-                                        <small>Nom: {option.nombre+' '+option.apellido_pat} - Puesto: {option.denom_puesto}</small>
-                                      </div>
-                                    </div>
-                                  )}
-                                ref={refAutoCompleteEdit}
-                            />
-                        </div>
-                </div>
+                                <button
+                                    type="submit"
+                                    className="btn btn-outline-success btn-block"
+                                >
+                                    <i className="far fa-save"></i>
+                                    <span> Guardar</span>
+                                </button>
 
-                <div className="row g-3 mb-3">
-                    <div className="col-sm-6">
-                        <div className="input-group">
-                            <span className="input-group-text">Nombre</span>
-                            <input 
-                                type="text" 
-                                aria-label="First name" 
-                                className="form-control" 
-                                placeholder="Nombre(s)" 
-                                name="nombreUsuario"
-                                value={activeRowEdit ? activeRowEdit.nombre : nombreUsuario}
-                                onChange={ handleRegisterInputChange }
-                                ref={inputNameRefEdit}
-                            />
-                        </div>
-                    </div>
-                    <div className="col-sm-6">
-                        <div className="input-group">
-                        <span className="input-group-text">Apellidos</span>
-                            <input 
-                                type="text" 
-                                aria-label="Last name" 
-                                className="form-control" 
-                                placeholder="Apellidos"
-                                name="apellidos"
-                                value={activeRowEdit ? activeRowEdit.apellido_pat +' '+activeRowEdit.apellido_mat : apellidos}
-                                onChange={ handleRegisterInputChange }
-                            />
-                        </div>
-                    </div>
-                </div>
+                            </div>               
 
+                    </div>
 
                 
 
-                <div className="row g-3 mb-3">
-                    
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Puesto</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            name="puesto"
-                            value={activeRowEdit ? activeRowEdit.denom_puesto : puesto}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Área</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername"
-                            name="area"
-                            value={activeRowEdit ? activeRowEdit.denom_servicio : area}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Extensión</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            name="extension"
-                            value={activeRowEdit ? activeRowEdit.extension : extension}
-                            onChange={ handleRegisterInputChange }
-                        />
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">@</span>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder="email" 
-                        name="email"
-                        value={activeRowEdit ? activeRowEdit.email : email}
-                        onChange={ handleRegisterInputChange }
-                    />
-                </div>
-
-                <small id="emailHelp" className="form-text text-muted">Información adicional</small>
-                <div className="input-group">
-                    <span className="input-group-text">Observaciones</span>
-                    <textarea 
-                        className="form-control" 
-                        aria-label="With textarea"
-                        name="observaciones"
-                        value={observaciones}
-                        onChange={ handleRegisterInputChange }
-                        ref={inputObservRefEdit}
-                    ></textarea>
-                </div>
-                
-                <hr />
-               
-
-                <button
-                    type="submit"
-                    className="btn btn-outline-primary btn-block"
-                >
-                    <i className="far fa-save"></i>
-                    <span> Guardar</span>
-                </button>
-
-            </form>
+                </form>
+        </div>
 
         </Modal>
     );

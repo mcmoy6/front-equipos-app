@@ -2,6 +2,7 @@ import {types} from '../types/types';
 
 const initialState = {
     modalOpen: false,
+    modalOpenEquiposMainBit: false,
     modalOpenEditEquipos: false,
     modalOpenEmpleado: false,
     modalOpenTicket: false,
@@ -9,7 +10,10 @@ const initialState = {
     modalOpenPrinterEdit: false,
     modalOpenUps: false,
     modalOpenMonitor: false,
-    movilOpenMenu: false
+    modalOpenCuenta: false,
+    movilOpenMenu: false,
+    openModalImagenologia: false,
+    modalOpenTelecom: false
 }
 
 
@@ -29,6 +33,20 @@ export const uiReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 modalOpen: false
+            }
+
+        case types.uiOpenModalEquiposMainBit:
+
+            return {
+                ...state,
+                modalOpenEquiposMainBit: true
+            }
+
+        case types.uiCloseModalEquiposMainBit:
+
+            return {
+                ...state,
+                modalOpenEquiposMainBit: false
             }
 
         case types.uiOpenModalEmpleado:
@@ -118,6 +136,42 @@ export const uiReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 modalOpenMonitor: false
+            }
+
+        case types.uiOpenModalCuenta:
+            return {
+                ...state,
+                modalOpenCuenta: true
+            }
+
+        case types.uiCloseModalCuenta:
+            return {
+                ...state,
+                modalOpenCuenta: false
+            }
+
+        case types.uiOpenModalImagenologia:
+            return {
+                ...state,
+                openModalImagenologia: true
+            }
+
+        case types.uiCloseModalImagenologia:
+            return {
+                ...state,
+                openModalImagenologia: false
+            }
+
+        case types.uiOpenModalTelecomunicacion:
+            return {
+                ...state,
+                modalOpenTelecom: true
+            }
+
+        case types.uiCLoseModalTelecomunicacion:
+            return {
+                ...state,
+                modalOpenTelecom: false
             }
 
         default:

@@ -1,7 +1,7 @@
 import { fetchConToken } from '../helpers/fetch';
 import {types} from '../types/types';
 import Swal from 'sweetalert2';
-import { toast, Zoom } from 'react-toastify';
+import { Slide, toast, Zoom } from 'react-toastify';
 
 
 import { empeladosStartLoadingAction } from './empleadosActions';
@@ -98,22 +98,34 @@ export const equiposStartAddNewAction = ( computer ) => {
                 computer.id = body.equipo.id
                 dispatch( equiposAddNewAction(computer) );
                 
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: body.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
+                toast.success(body.msg, {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_RIGHT,
+                    containerId: "anId",
+                    transition: Zoom,
+                    theme: "colored"
+                });
 
 
             }else {
                 
-                toast.error(body.errors.area.msg, {
-                    autoClose: 1500,
-                    position: toast.POSITION.TOP_CENTER,
-                    transition: Zoom,
-                    theme: "colored"
+                toast.error(body.msg, {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_RIGHT,
+                    containerId: "anId2",
+                    transition: Slide,
+                    theme: "dark"
+                });
+
+                toast.error(body.errors[0].msg, {
+                    autoClose: 3000,
+                    position: toast.POSITION.TOP_RIGHT,
+                    containerId: "anId2",
+                    transition: Slide,
+                    theme: "dark",
+                    // onClose: () => {
+                    //     dispatch( uiCloseModalCuentaAction() );
+                    // }
                 });
 
                 dispatch( empeladosStartLoadingAction() );

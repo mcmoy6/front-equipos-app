@@ -1,6 +1,6 @@
 import React from 'react'
 // import { useDispatch } from 'react-redux';
-import FeatherIcon from 'feather-icons-react';
+// import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom';
 
 
@@ -28,7 +28,7 @@ export const EquiposAddNewBtn = () => {
     return (
         <Link to="/equiposNew">
             <button className="btn btn-primary fab">
-                <FeatherIcon icon="plus" />
+                <i className="fas fa-plus"></i>
             </button>
         </Link>
     )

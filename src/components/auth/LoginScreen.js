@@ -70,7 +70,7 @@ export const LoginScreen = () => {
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField 
                         label="Correo"
-                        type="text"
+                        type="email"
                         placeholder='correo@google.com'
                         name="logEmail"
                         value={logEmail}

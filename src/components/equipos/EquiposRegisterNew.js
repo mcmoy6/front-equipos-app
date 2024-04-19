@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
-import { Typeahead } from 'react-bootstrap-typeahead'; // ES2015
+import { Highlighter, Typeahead } from 'react-bootstrap-typeahead'; // ES2015
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
-import { ToastContainer, toast, Zoom  } from 'react-toastify';
+import { ToastContainer  } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
  
 // import 'react-overlay-loader/styles.css';
 
-import { equipoClearSetActiveTempAction, equipoSetActiveTempAction, equiposNoGoBackAction, equiposStartAddNewAction, uiCloseModalEquAction, uiOpenModalEmpleadoAction } from '../../actions/equiposActions';
+import { equipoClearSetActiveTempAction, equipoSetActiveTempAction, equiposNoGoBackAction, equiposStartAddNewAction, uiOpenModalEmpleadoAction } from '../../actions/equiposActions';
 
 
 import './equipos-styles.css';
@@ -18,7 +18,7 @@ import { empeladosStartLoadingAction, empleadoClearSetActiveAction, empleadoCust
 import { sitiosClearLoadedAction, sitiosStartLoadingAction } from '../../actions/sitiosActions';
 import { inventariosClearLoadedAction, inventariosStartLoadingAction } from '../../actions/inventariosActions';
 import { reguladorCustOptionAction, uiOpenModalUpsAction } from '../../actions/reguladoresActions';
-import { uiOpenModalMonitorAction } from '../../actions/monitoresActions';
+// import { uiOpenModalMonitorAction } from '../../actions/monitoresActions';
 import { loadingActivateAction } from '../../actions/loadingActions';
 import { EquiposModalEdit } from './EquiposModalEdit';
 import { EmpleadoModalNew } from '../empleado/EmpleadoModalNew';
@@ -50,9 +50,11 @@ Modal.setAppElement('#root');
     serieMonitor: '',
     serieNobreakAnt: '',
     serieNobreak: '',
+    serieCandado: '',
     ip: '',
     nombreEquipo: '',
     cuenta: '',
+    aplicativoInst: '',
     nombreUsuario: '',
     apellidos: '',
     puesto: '',
@@ -67,7 +69,7 @@ export const EquiposRegisterNew = () => {
 
     const navigate = useNavigate();
 
-    const refSerieCpu = useRef();
+    // const refSerieCpu = useRef();
 
     const refCuenta = useRef();
 
@@ -100,11 +102,13 @@ export const EquiposRegisterNew = () => {
     const { 
                 fuap,
                 denomSitio,
-                // serieMonitor,
+                serieMonitor,
                 serieNobreakAnt,
+                serieCandado,
                 ip,
                 nombreEquipo,
                 cuenta,
+                aplicativoInst,
                 nombreUsuario,
                 apellidos,
                 puesto,
@@ -123,7 +127,7 @@ export const EquiposRegisterNew = () => {
 
     const [upsSingleSeletions, setUpsSingleSelections] = useState([]);
 
-    const [ monitorSingleSelections, setMonitorSingleSelections ] = useState([]);
+    // const [ monitorSingleSelections, setMonitorSingleSelections ] = useState([]);
 
     const [show, setShow] = useState(false);
 
@@ -138,7 +142,7 @@ export const EquiposRegisterNew = () => {
     // 👇 React Hook useEffect has a missing dependency: 'formValues'. 
     // Either include it or remove the dependency array.
             
-        const focusFormValues = setInterval( () =>{
+        const focusFormValues = setInterval( () => {
 
             setDisabledForm(true);
             
@@ -155,8 +159,8 @@ export const EquiposRegisterNew = () => {
 
          });   
 
-         refAutoComplete.current.blur();
-         inputObservRef.current.focus();
+        //  refAutoComplete.current.blur();
+        //  inputObservRef.current.focus();
 
          return () => clearInterval( focusFormValues );
 
@@ -203,7 +207,7 @@ export const EquiposRegisterNew = () => {
 
             setFormValues(initRow);
             setSingleSelections([]);
-            setMonitorSingleSelections([]);
+            // setMonitorSingleSelections([]);
             setUpsSingleSelections([]);
             setSitioSingleSelections([]);
             dispatch( empleadoClearSetActiveAction() );
@@ -220,11 +224,11 @@ export const EquiposRegisterNew = () => {
       }, [dispatch]);
       
 
-      useEffect( () => {
-            setTimeout(() => {
-                refSerieCpu.current.focus();
-             }, 200);
-      }, []);
+    //   useEffect( () => {
+    //         setTimeout(() => {
+    //             refSerieCpu.current.focus();
+    //          }, 200);
+    //   }, []);
 
       
       
@@ -252,7 +256,13 @@ export const EquiposRegisterNew = () => {
             
     }
 
+    const handleKeyPresChange = ({target}) => {
 
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value.toUpperCase()
+        });
+    }
 
     const handleSitioSelected = (event) => {
 
@@ -286,21 +296,21 @@ export const EquiposRegisterNew = () => {
         barLoading();
         setInventarioSingleSelectios(event);
         
-        const sNbk = event.map( datosInventario =>(datosInventario.nobreak));
-        const sMonitor = event.map( datosInventario =>(datosInventario.serie_monitor));
+        // const sNbk = event.map( datosInventario =>(datosInventario.nobreak));
+        // const sMonitor = event.map( datosInventario =>(datosInventario.serie_monitor));
         
         const [snCpu] = event.map( datosInventario =>(datosInventario.serie_cpu));
         const [snMonitor] = event.map( datosInventario =>(datosInventario.serie_monitor));
         const [noBreakAnt] = event.map( datosInventario =>(datosInventario.nobreak));
-        const [snNobreak] = event.map( datosInventario =>(datosInventario.nobreak));
-        const [assignedIp] = event.map( datosInventario =>(datosInventario.ip));
+        // const [snNobreak] = event.map( datosInventario =>(datosInventario.nobreak));
+        // const [assignedIp] = event.map( datosInventario =>(datosInventario.ip));
         const [equipoName] = event.map( datosInventario =>(datosInventario.hostname));
         const [fuapActual] = event.map( datosInventario =>(datosInventario.fuap_actual));
         const [ctaUser] = event.map( datosInventario =>(datosInventario.cuenta_user));
-        const [nombre_usu] = event.map( datosInventario =>(datosInventario.nombre_usuario));
-        const [apellido_p] = event.map( datosInventario =>(datosInventario.paterno));
-        const [apellido_m] = event.map( datosInventario =>(datosInventario.materno));
-        const [correo] = event.map( datosInventario =>(datosInventario.correo));
+        // const [nombre_usu] = event.map( datosInventario =>(datosInventario.nombre_usuario));
+        // const [apellido_p] = event.map( datosInventario =>(datosInventario.paterno));
+        // const [apellido_m] = event.map( datosInventario =>(datosInventario.materno));
+        // const [correo] = event.map( datosInventario =>(datosInventario.correo));
         
         
         
@@ -315,21 +325,22 @@ export const EquiposRegisterNew = () => {
                 setValidarCuenta(false);
             }
             
-            setUpsSingleSelections(sNbk);
-            setMonitorSingleSelections(sMonitor);
+            setUpsSingleSelections([]);
+            // setUpsSingleSelections(sNbk);
+            // setMonitorSingleSelections(sMonitor);
             setFormValues({
                 ...formValues,
                 serieCpu: !!snCpu ? snCpu : '',
                 serieMonitor: !!snMonitor ? snMonitor : '',
                 serieNobreakAnt: !!noBreakAnt ? noBreakAnt : '',
-                serieNobreak: !!snNobreak ? snNobreak : '',
-                ip: !!assignedIp ? assignedIp : '',
+                // serieNobreak: !!snNobreak ? snNobreak : '',
+                // ip: !!assignedIp ? assignedIp : '',
                 nombreEquipo: !!equipoName ? equipoName : '',
                 fuap: !!fuapActual ? fuapActual : '',
                 cuenta: !!ctaUser ? ctaUser : '',
-                nombreUsuario: !!nombre_usu ? nombre_usu : '',
-                apellidos: !!apellido_p ? apellido_p+' '+apellido_m : '',
-                email: !!correo ? correo : '',
+                // nombreUsuario: !!nombre_usu ? nombre_usu : '',
+                // apellidos: !!apellido_p ? apellido_p+' '+apellido_m : '',
+                // email: !!correo ? correo : '',
             });
 
             // Volvemos el formulario al color normal
@@ -409,24 +420,24 @@ export const EquiposRegisterNew = () => {
 
     }
 
-    const handleMonitorSelected = (event) => {
+    // const handleMonitorSelected = (event) => {
 
-        setMonitorSingleSelections(event);
+    //     setMonitorSingleSelections(event);
 
-        const [snMonitor] = event.map( datosMonitor =>(datosMonitor.serie_monitor) );
-        const [custOption] = event.map( datosMonitor =>(datosMonitor.customOption) );
+    //     const [snMonitor] = event.map( datosMonitor =>(datosMonitor.serie_monitor) );
+    //     const [custOption] = event.map( datosMonitor =>(datosMonitor.customOption) );
 
-        setFormValues({
-            ...formValues,
-            serieMonitor: !!snMonitor ? snMonitor : ''
-        });
+    //     setFormValues({
+    //         ...formValues,
+    //         serieMonitor: !!snMonitor ? snMonitor : ''
+    //     });
 
-        if ( custOption && activeEquiposTemp ) {
-            // console.log('Disparar accion para abrir modal');
-            dispatch( uiOpenModalMonitorAction() );
-        }
+    //     if ( custOption && activeEquiposTemp ) {
+    //         // console.log('Disparar accion para abrir modal');
+    //         dispatch( uiOpenModalMonitorAction() );
+    //     }
 
-    }
+    // }
 
 const handleSubmitForm = (e) => {
         e.preventDefault();
@@ -437,17 +448,17 @@ const handleSubmitForm = (e) => {
     //     return setValidarFuap(false);
     // }
 
-    if( area.trim().length < 2){
-        // En caso de que el titulo tenga menos de 2 caracteres se manda llamar el estado "setValidarTitulo" y se cambia a false.
+    // if( area.trim().length < 2){
+    //     // En caso de que el titulo tenga menos de 2 caracteres se manda llamar el estado "setValidarTitulo" y se cambia a false.
                
-        return toast.error('Ingresa el área del usuario', {
-                autoClose: false,
-                position: toast.POSITION.TOP_CENTER,
-                transition: Zoom,
-                theme: "colored"
-            });
+    //     return toast.error('Ingresa el área del usuario', {
+    //             autoClose: false,
+    //             position: toast.POSITION.TOP_CENTER,
+    //             transition: Zoom,
+    //             theme: "colored"
+    //         });
 
-    }
+    // }
 
     if (activeRow) {
         setValidarArea(true);
@@ -477,30 +488,32 @@ const handleSubmitForm = (e) => {
     dispatch( loadingActivateAction() );
 
     setValidarArea(true);
-    closeModal();
+    // closeModal();
     
     
 
 }
 
-const closeModal = () => {
+// const closeModal = () => {
 
-        dispatch( uiCloseModalEquAction() );
-        setFormValues(initRow);
-        setSingleSelections([]);
-        setMonitorSingleSelections([]);
-        setUpsSingleSelections([]);
-        setSitioSingleSelections([]);
-        dispatch( empleadoClearSetActiveAction() );
-        dispatch( empleadosClearLoadedAction() );
-        dispatch( sitiosClearLoadedAction() );
-        dispatch( inventariosClearLoadedAction() );
-        dispatch( equipoClearSetActiveTempAction() );
+//         dispatch( uiCloseModalEquAction() );
+//         // setSingleSelections([]); // Limpiamos el numero de empleado
+//         // setInventarioSingleSelectios([]); // Limpiamos Serie cpu
+//         // setMonitorSingleSelections([]); // Limpiamos Serie Monitor
+//         // setUpsSingleSelections([]); // Limpiamos Serie UPS
+//         // setSitioSingleSelections([]); // Limpiamos id Sitio
+//         // setFormValues(initRow); // Limpiamos formulario restante
+//         dispatch( empleadoClearSetActiveAction() );
+//         dispatch( empleadosClearLoadedAction() );
+//         dispatch( sitiosClearLoadedAction() );
+//         dispatch( inventariosClearLoadedAction() );
+//         dispatch( equipoClearSetActiveTempAction() );
 
-        setInventarioSingleSelectios([]);
-    //  setValidarCuenta(true);
 
-}
+        
+//     //  setValidarCuenta(true);
+
+// }
 
   return (
 
@@ -518,211 +531,26 @@ const closeModal = () => {
                 loaderSpeed={700}
             />
 
+<ToastContainer
+            enableMultiContainer
+            containerId={"anId2"}
+        /> 
+
             {/* <button onClick={() => ref.current.complete()}>Complete</button> */}
 
         <h5> NUEVO REGISTRO </h5>
         <hr />
         <ToastContainer />
         {/* { show && <img className='img-loading' alt='My loading' src="http://rpg.drivethrustuff.com/shared_images/ajax-loader.gif"/> } */}
-            <form className="container" onSubmit={ handleSubmitForm } id="formModal" >
+        <form className="container" onSubmit={ handleSubmitForm } id="formModal" >
 
-            <label className="form-label">Datos del Equipo</label>
-                
-                <div className="row g-3 mb-3">
-                    
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                            <div className="input-group-text">CPU</div>
-                            <Typeahead
-                                id="basic-typeahead-sitios"
-                                // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
-                                labelKey="serie_cpu"
-                                // newSelectionPrefix="Agregar nvo: "
-                                onChange={handleInventarioSelected}
-                                options={inventariosData}
-                                selected={inventarioSingleSelections}
-                                // allowNew
-                                minLength={2}
-                                renderMenuItemChildren={(option) => (
-                                        <div className='inventory-autocompelte'>
-                                            {option.serie_cpu}
-                                            <div>
-                                                <small>
-                                                    Monitor: {option.serie_monitor}
-                                                </small>
-                                            </div>
-                                            <div className='invent-nobreake'>
-                                                <small>
-                                                    No-Break: {option.nobreak}
-                                                </small>
-                                            </div>
-                                        </div>
-                                    )}
-                                ref={refSerieCpu}
-                            />
-                            
-                            {/* <input 
-                                type="text" 
-                                className="form-control" 
-                                id="specificSizeInputGroupUsername" 
-                                placeholder="Serie del CPU" 
-                                name="serieCpu"
-                                value={serieCpu}
-                                onChange={ handleRegisterInputChange }
-                            /> */}
-                        </div>
-                    </div>
-
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Monitor</div>
-
-                            <Typeahead
-                                allowNew
-                                id="basic-typeahead-multiple"
-                                // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
-                                labelKey="serie_monitor"
-                                // multiple
-                                newSelectionPrefix="Nvo Ups: "
-                                onChange={ handleMonitorSelected }
-                                options={[]}
-                                selected={ monitorSingleSelections }
-                                minLength={2}
-                            />
-
-                            {/* <input 
-                                type="text" 
-                                className="form-control" 
-                                id="specificSizeInputGroupUsername" 
-                                placeholder="Serie del monitor" 
-                                name="serieMonitor"
-                                value={serieMonitor}
-                                onChange={ handleRegisterInputChange }
-                            /> */}
-                            
-                        </div>
-                    </div>
-
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Ups</div>
-
-                            <Typeahead
-                                allowNew
-                                id="basic-typeahead-multiple"
-                                // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
-                                labelKey="serie_ups"
-                                multiple
-                                newSelectionPrefix="Nvo Ups: "
-                                onChange={handleUpsSelected}
-                                options={[]}
-                                selected={upsSingleSeletions}
-                                minLength={2}
-                            />
-
-                            {/* <input 
-                                type="text" 
-                                className="form-control" 
-                                id="specificSizeInputGroupUsername" 
-                                placeholder="Serie del UPS" 
-                                name="serieNobreak"
-                                value={serieNobreak}
-                                onChange={ handleRegisterInputChange }
-                            /> */}
-
-                        <input 
-                            type="hidden" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            name="serieNobreakAnt"
-                            value={serieNobreakAnt}
-                            onChange={ handleRegisterInputChange }
-                        />
-                    
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="row g-3 mb-3">
-                    
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">IP</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Ej 192.160.206.109" 
-                            name="ip"
-                            value={ip}
-                            onChange={ handleRegisterInputChange }
-                        />
-                    
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Nom. Eq.</div>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Nombre del equipo" 
-                            name="nombreEquipo"
-                            value={nombreEquipo}
-                            onChange={ handleRegisterInputChange }
-                        />
-                    
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
-                        <div className="input-group">
-                        <div className="input-group-text">Cuenta</div>
-                        <input 
-                            type="text" 
-                            // className={`form-control ${ !validarCuenta && 'is-invalid'}`} 
-                            className="form-control"
-                            id="specificSizeInputGroupUsername" 
-                            placeholder="Cuenta de usuario" 
-                            name="cuenta"
-                            value={cuenta}
-                            onChange={ handleRegisterInputChange }
-                            ref={ refCuenta }
-                        />
-                        
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="row g-3 mb-3">
-                    <div className="col-sm-8">
-                        <div className="input-group">
-                            <div className="input-group-text">FUAP</div>
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                aria-label="Username" 
-                                aria-describedby="basic-addon1" 
-                                name="fuap"
-                                value={ fuap }
-                                onChange={ handleRegisterInputChange }
-                            />
-                        
-                        </div>
-                    </div>
-                </div>
-                
-                <hr />
-                
-                <label className="form-label">Datos del Sitio</label>
+            <label className="form-label">Datos del Sitio</label>
                 <div className="row g-3 mb-3">
                     <div className="col-sm-4">
                         <div className="input-group">
                             <div className="input-group-text">ID. SITIO</div>
                             <Typeahead
-                                id="basic-typeahead-sitios"
+                                id="basic-typeahead-sitio"
                                 // className='form-control'
                                 // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
                                 labelKey="id_sitio"
@@ -732,9 +560,12 @@ const closeModal = () => {
                                 selected={sitioSingleSeletions}
                                 // allowNew
                                 minLength={2}
-                                renderMenuItemChildren={(option) => (
+                                disabled={disabledForm}
+                                renderMenuItemChildren={(option, props, idx) => (
                                     <div>
-                                        {option.id_sitio}
+                                        <Highlighter search={props.text}>
+                                            {option.id_sitio}
+                                        </Highlighter> 
                                         <div>
                                             <small>
                                                 Sitio: {option.denominacion_sitio}
@@ -742,7 +573,7 @@ const closeModal = () => {
                                         </div>
                                     </div>
                                     )}
-                                // ref={refAutoComplete}
+                                ref={refAutoComplete}
                             />
                             {/* <input 
                                 type="text" 
@@ -762,7 +593,7 @@ const closeModal = () => {
                             <input 
                                 type="text" 
                                 className="form-control" 
-                                id="specificSizeInputGroupUsername" 
+                                id="specificSizeInputGroupDenomSitio" 
                                 placeholder="Denominación del Sitio" 
                                 name="denomSitio"
                                 value={denomSitio}
@@ -772,15 +603,51 @@ const closeModal = () => {
                     </div>
                 </div>
 
-                <hr />
-                
-                <label className="form-label">Datos del Empleado</label>
+            <hr />
+
+            <label className="form-label">Datos del Empleado</label>
+
+            <div className="row g-3 mb-4">
+                    <div className="input-group">
+                    {/* <span className="input-group-text">Nombre Empleado:</span> */}
+                        <Typeahead
+                            id="basic-typeahead-single-nombreEmpleado"
+                            // className='form-control'
+                            labelKey={(data) => `${data.label} ${data.nombre}`}
+                            // labelKey="apellido_pat"
+                            onChange={handleSelected}
+                            options={data}
+                            selected={singleSelections}
+                            // allowNew
+                            minLength={2}
+                            placeholder="Buscar por nombre o num empleado.."
+                            renderMenuItemChildren={(option, props, idx) => (
+                                <div>
+                                    <Highlighter search={props.text}>
+                                        {option.label+' - '+option.nombre}
+                                    </Highlighter>
+                                    <div>
+                                        <small>
+                                            RFC: {option.rfc}
+                                        </small>
+                                    </div>
+                                    <div>
+                                        <small>
+                                            Puesto: {option.denom_puesto}
+                                        </small>
+                                    </div>
+                                </div>
+                                )}
+                            ref={refAutoComplete}
+                        />
+                    </div>
+                </div>                
 
                 <div className="row g-3 mb-4">
                     <div className="input-group">
                     <span className="input-group-text">Num. Empleado:</span>
                         <Typeahead
-                            id="basic-typeahead-single"
+                            id="basic-typeahead-single-numEmpleado"
                             // className='form-control'
                             // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
                             labelKey="label"
@@ -790,9 +657,11 @@ const closeModal = () => {
                             selected={singleSelections}
                             allowNew
                             minLength={2}
-                            renderMenuItemChildren={(option) => (
+                            renderMenuItemChildren={(option, props, idx) => (
                                 <div>
-                                    {option.label}
+                                    <Highlighter search={props.text}>
+                                        {option.label}
+                                    </Highlighter>
                                     <div>
                                         <small>
                                             {option.nombre+' '+option.apellido_pat} - Puesto: {option.denom_puesto}
@@ -853,7 +722,7 @@ const closeModal = () => {
                         <input 
                             type="text" 
                             className="form-control" 
-                            id="specificSizeInputGroupUsername" 
+                            id="specificSizeInputGroupPuesto" 
                             name="puesto"
                             value={ puesto }
                             onChange={ handleRegisterInputChange }
@@ -867,10 +736,11 @@ const closeModal = () => {
                         <input 
                             type="text" 
                             className={`form-control ${ !validarArea && 'is-invalid' }`} 
-                            id="specificSizeInputGroupUsername"
+                            id="specificSizeInputGroupArea"
                             name="area"
                             value={ area }
                             onChange={ handleRegisterInputChange }
+                            onKeyUp={ handleKeyPresChange }
                             disabled={disabledForm}
                         />
                         </div>
@@ -881,7 +751,7 @@ const closeModal = () => {
                         <input 
                             type="text" 
                             className="form-control" 
-                            id="specificSizeInputGroupUsername" 
+                            id="specificSizeInputGroupExtension" 
                             name="extension"
                             value={ extension }
                             onChange={ handleRegisterInputChange }
@@ -895,7 +765,8 @@ const closeModal = () => {
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">@</span>
                     <input 
-                        type="text" 
+                        id='specificSizeInputGroupMail'
+                        type="email" 
                         className="form-control" 
                         placeholder="email" 
                         name="email"
@@ -904,6 +775,244 @@ const closeModal = () => {
                         disabled={disabledForm}
                     />
                 </div>
+
+                <hr />
+
+                <label className="form-label">Datos del Equipo</label>
+                
+                <div className="row g-3 mb-3">
+                    
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                            <div className="input-group-text">S. CPU</div>
+                            <Typeahead
+                                id="basic-typeahead-sitios"
+                                // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
+                                labelKey="serie_cpu"
+                                // newSelectionPrefix="Agregar nvo: "
+                                onChange={handleInventarioSelected}
+                                options={inventariosData}
+                                selected={inventarioSingleSelections}
+                                // allowNew
+                                minLength={2}
+                                renderMenuItemChildren={(option, props, idx) => (
+                                        <div className='inventory-autocompelte'>
+                                            <Highlighter search={props.text}>
+                                                {option.serie_cpu}
+                                            </Highlighter>
+                                            <div>
+                                                <small>
+                                                    Monitor: {option.serie_monitor}
+                                                </small>
+                                            </div>
+                                            <div className='invent-nobreake'>
+                                                <small>
+                                                    No-Break: {option.nobreak}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    )}
+                                // ref={refSerieCpu}
+                            />
+                            
+                            {/* <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Serie del CPU" 
+                                name="serieCpu"
+                                value={serieCpu}
+                                onChange={ handleRegisterInputChange }
+                            /> */}
+                        </div>
+                    </div>
+
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                        <div className="input-group-text">Monitor</div>
+
+                            {/* <Typeahead
+                                allowNew
+                                id="basic-typeahead-multiple"
+                                // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
+                                labelKey="serie_monitor"
+                                // multiple
+                                newSelectionPrefix="Nvo monitor: "
+                                onChange={ handleMonitorSelected }
+                                options={[]}
+                                selected={ monitorSingleSelections }
+                                minLength={2}
+                            /> */}
+
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Serie del monitor" 
+                                name="serieMonitor"
+                                value={serieMonitor}
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                            
+                        </div>
+                    </div>
+
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                        <div className="input-group-text">Ups</div>
+
+                            <Typeahead
+                                allowNew
+                                id="basic-typeahead-multiple-ups"
+                                // labelKey={(data) => `${data.label} ${data.nombre} ${data.apellido_pat}`}
+                                labelKey="serie_ups"
+                                multiple
+                                newSelectionPrefix="Nvo Ups: "
+                                onChange={handleUpsSelected}
+                                options={[]}
+                                selected={upsSingleSeletions}
+                                minLength={2}
+                            />
+
+                            {/* <input 
+                                type="text" 
+                                className="form-control" 
+                                id="specificSizeInputGroupUsername" 
+                                placeholder="Serie del UPS" 
+                                name="serieNobreak"
+                                value={serieNobreak}
+                                onChange={ handleRegisterInputChange }
+                            /> */}
+
+                        <input 
+                            type="hidden" 
+                            className="form-control" 
+                            id="specificSizeInputGroupSerieNobreak" 
+                            name="serieNobreakAnt"
+                            value={serieNobreakAnt}
+                            onChange={ handleRegisterInputChange }
+                        />
+                    
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="row g-3 mb-3">
+                    
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                        <div className="input-group-text">IP</div>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="specificSizeInputGroupIp" 
+                            placeholder="Ej 192.160.206.109" 
+                            name="ip"
+                            value={ip}
+                            onChange={ handleRegisterInputChange }
+                        />
+                    
+                        </div>
+                    </div>
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                        <div className="input-group-text">Nom. Eq.</div>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="specificSizeInputGroupNomEquipo" 
+                            placeholder="Nombre del equipo" 
+                            name="nombreEquipo"
+                            value={nombreEquipo}
+                            onChange={ handleRegisterInputChange }
+                            onKeyUp={ handleKeyPresChange }
+                        />
+                    
+                        </div>
+                    </div>
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                        <div className="input-group-text">Cuenta</div>
+                        <input 
+                            type="text" 
+                            // className={`form-control ${ !validarCuenta && 'is-invalid'}`} 
+                            className="form-control"
+                            id="specificSizeInputGroupCuenta" 
+                            placeholder="Cuenta de usuario" 
+                            name="cuenta"
+                            value={cuenta}
+                            onChange={ handleRegisterInputChange }
+                            ref={ refCuenta }
+                        />
+                        
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="row g-3 mb-3">
+                    <div className="col-sm-8">
+                        <div className="input-group">
+                            <div className="input-group-text">FUAP</div>
+                            <input 
+                                id='elementFuap'
+                                type="text" 
+                                className="form-control" 
+                                aria-label="Username" 
+                                aria-describedby="basic-addon1" 
+                                name="fuap"
+                                value={ fuap }
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                        
+                        </div>
+                    </div>
+
+                    <div className="col-sm-4">
+                        <div className="input-group">
+                            <div className="input-group-text">Candado</div>
+                            <input 
+                                id='elementCandado'
+                                type="text" 
+                                className="form-control" 
+                                aria-label="Candado" 
+                                aria-describedby="basic-addon1" 
+                                name="serieCandado"
+                                value={ serieCandado }
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row g-3 mb-3">
+
+                    <div className="col-sm-8">
+                        <div className="input-group">
+                            <div className="input-group-text">Aplicativo Inst.</div>
+                            <input 
+                                id='aplicativoInst'
+                                type="text" 
+                                className="form-control" 
+                                aria-label="Aplicativo" 
+                                aria-describedby="basic-addon1" 
+                                name="aplicativoInst"
+                                value={ aplicativoInst }
+                                onChange={ handleRegisterInputChange }
+                                onKeyUp={ handleKeyPresChange }
+                            />
+                        
+                        </div>
+                    </div>
+
+                </div>
+                
+                <hr />
 
                 <small id="emailHelp" className="form-text text-muted">Información adicional</small>
                 <div className="input-group">

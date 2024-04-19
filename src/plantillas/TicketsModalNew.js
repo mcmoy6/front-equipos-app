@@ -16,7 +16,7 @@ const customStyles = {
     },
   };
 
-  Modal.setAppElement('#root');
+Modal.setAppElement('#root');
 
 
 export const TicketsModalNew = () => {

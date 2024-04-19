@@ -5,6 +5,9 @@ export const types = {
     uiOpenModalEquipos: '[ui] Open modal equipos',
     uiCloseModalEquipos: '[ui] Close modal equipos',
 
+    uiOpenModalEquiposMainBit: '[ui] Open modal equipos mainbit',
+    uiCloseModalEquiposMainBit: '[ui] Close modal equipos mainbit',
+
     uiOpenModalEditEquipos: '[ui] Open modal edit equipos',
     uiCloseModalEditEquipos: '[ui] Close modal edit equipos',
 
@@ -24,6 +27,15 @@ export const types = {
 
     uiOpenModalMonitor: '[ui] Open modal monitor',
     uiCloseModalMonitor: '[ui] Close modal monitor',
+
+    uiOpenModalCuenta: '[ui] Open modal cuenta',
+    uiCloseModalCuenta: '[ui] Close modal cuenta',
+
+    uiOpenModalImagenologia: '[ui] Open modal imagenologia',
+    uiCloseModalImagenologia: '[ui] Close modal imagenologia',
+
+    uiOpenModalTelecomunicacion: '[ui] Open modal telecomunicacion',
+    uiCLoseModalTelecomunicacion:'[ui] Close modal telecomunicaicon',
 
     uiMovilOpenMenu: '[ui] Toggle movil open',
     
@@ -50,6 +62,23 @@ export const types = {
 
     equiposGoBackEquipos: '[equipos] Equipos go back',
     equiposNoGoBackEquipos: '[Equipos] Equipos no go back',
+
+    equiposMainBitGetLoaded: '[equiposMainBit] Equipos Mainbit Get Loaded',
+    equipoMainBitSetActive: '[equiposMainBit] Equipos Mainbit set active',
+    equipoClearMainBitSetActive: '[equiposMainBit] Equipos Mainbit clear set active',
+    equiposMainBitAddNew: '[equiposMainBit] Equipos MainBit add new',
+    equiposMainBitRowUpdated: '[equiposMainBit] Equipos MainBit row update',
+    equiposMainBitValidaForm: '[equiposMainBit] Equipos MainBit valida form',
+    equiposMainBitOnFocus: '[equiposMainBit] Equipos MainBit on Focus',
+
+    cuentasGetLoaded: '[cuentas] Cuentas get loaded',
+    cuentasAddNew: '[cuentas] Cuentas add new',
+    cuentasFlagCloseModal: '[cuentas] Cuentas flag to close modal',
+    cuentasResetForm: '[cuentas] Cuentas reset form',
+    cuentasValidaForm: '[cuentas] Cuantas validar formulario',
+    cuentasClearValidaForm: '[cuentas] Cuentas Clear valida formulario',
+
+    carritoAddItem: '[carrito] Carrito add item',
 
     empleadoSetActive: '[empleados] Empleado set active',
     empleadoClearSetActie: '[empleados] Empleado clear set active',
@@ -84,9 +113,21 @@ export const types = {
     printerSetActive: '[printers] Printer set active',
     printerClearActive: '[printers] Printer clear active',
     printerRowUpdated: '[printers] Printer Row updated',
+    printerValidaForm: '[printers] Printers validar formulario',
+    printerClearValidaForm: '[printers] Printers Clear valida formulario',
 
     inventariosGetLoaded: '[inventarios] Inventarios get loaded',
     inventariosClearLoaded: '[inventarios] Inventarios clear loaded',
+
+    imagenologiasGetLoaded: '[imagenologia] Imagenologia get loaded',
+    imagenologiasAddNew: '[imagenologia] Imagenologia add new',
+    imagenologiasValidaForm: '[imagenologia] Imagenologias validar formulario',
+    imagenologiasClearValidaForm: '[imagenologia] Imagenologias Clear valida formulario',
+
+    telecomGetLoaded: '[telecomunicaciones] Telecomunicaciones get loaded',
+    telecomAddNew: '[telecomunicaciones] Telecomunicaciones add new',
+    telecomunicacionesValidaForm: '[telecomunicaciones] Telecomunicaciones valida form',
+    telecomunicacionesClearValidaForm: '[telecomunicaciones] Telecomunicaciones clear valida form',
 
     reguladoresAddNew: '[reguladores] Reguladores Add new',
     reguladorCustOption: '[reguladores] Regulador custom option',

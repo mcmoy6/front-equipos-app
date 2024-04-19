@@ -3,7 +3,8 @@ import { types } from '../types/types';
 
 const initialState  = {
     data: [],
-    activeRowPrinter: null
+    activeRowPrinter: null,
+    validaFormPrinter: null
 }
 
 export const printerReducer = ( state = initialState, action ) => {
@@ -80,6 +81,20 @@ export const printerReducer = ( state = initialState, action ) => {
 
             return {
                 ...initialState
+            }
+
+        case types.printerValidaForm:
+
+            return {
+                ...state,
+                validaFormPrinter: action.payload
+            }
+
+        case types.printerClearValidaForm:
+
+            return {
+                ...state,
+                validaFormPrinter: null
             }
     
         default:

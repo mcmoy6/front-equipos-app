@@ -4,6 +4,8 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 // import FeatherIcon from 'feather-icons-react';
 // import { Loader } from 'react-overlay-loader';
 import LoadingBar from 'react-top-loading-bar';
+import { ToastContainer  } from 'react-toastify';
+import { CSVLink } from "react-csv";
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -23,11 +25,12 @@ import { DeleteEquipoBtn } from '../ui/ui-equipos/DeleteEquipoBtn';
 import { EquiposAddNewBtn } from '../ui/ui-equipos/EquiposAddNewBtn';
 import { EquiposEditBtn } from '../ui/ui-equipos/EquiposEditBtn';
 import { EquiposModalEdit } from './EquiposModalEdit';
-import { EquiposModalNew } from './EquiposModalNew';
+// import { EquiposModalNew } from './EquiposModalNew';
 import { UpsModalNew } from '../reguladores/UpsModalNew';
 import { MonitoresModalNew } from '../monitores/MonitoresModalNew';
 import { BootstrapCardDataTable } from '../../loaders/BootstrapCardDataTable';
 import { loadingDeactivateAction } from '../../actions/loadingActions';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 
 const columns = [
@@ -72,6 +75,7 @@ const columns = [
 export const EquiposScreen = () => {
 
   // const [show, setShow] = useState(false);
+  const { width } = useScreenSize();
 
   const [ mostrarCardTable, setMostrarCardTable ] = useState(true);
 
@@ -178,7 +182,7 @@ const customStyles = {
 
   const ExpandedComponent = ({ data }) => (
 
-    <Card sx={{ maxWidth: 325, my: 1, mx: 1 }}>
+    <Card sx={{ maxWidth: 370, my: 1, mx: 1 }}>
       <CardContent>
 
         <Grid container alignItems="center" spacing={2}>
@@ -264,7 +268,22 @@ const customStyles = {
           </Grid>
           <Grid  item xs={8}>
             <Typography variant='body2' align='left' gutterBottom>
-            {data.serieNobreakAnt}
+            {data.serieNobreak}
+            </Typography>
+          </Grid>
+        </Grid>
+       
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              S/ Candado: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.serieCandado}
             </Typography>
           </Grid>
         </Grid>
@@ -310,6 +329,21 @@ const customStyles = {
           <Grid  item xs={8}>
             <Typography variant='body2' align='left' gutterBottom>
             {data.cuenta}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Divider />
+
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={4}>
+            <Typography variant='subtitle2' align='left' gutterBottom>
+              Aplicativo Inst: 
+            </Typography>
+          </Grid>
+          <Grid  item xs={8}>
+            <Typography variant='body2' align='left' gutterBottom>
+            {data.aplicativoInst}
             </Typography>
           </Grid>
         </Grid>
@@ -409,38 +443,6 @@ const customStyles = {
     </Card>
 
   );
-//   const ExpandedComponent = ({ data }) => (<div className='expanded-component_computer'>
-        
-//     <table className="table table-hover">
-       
-//         <tbody>
-//             <tr>
-//               <th scope="row">Fuap:</th>
-//                 <td>{data.fuap}</td>
-//             </tr>
-//             <tr>
-//               <th scope="row">Sitio:</th>
-//                 <td>{data.sitio}</td>
-//             </tr>
-//             <tr>
-//               <th scope="row">Cuenta usuario:</th>
-//                 <td>{data.cuenta}</td>
-//             </tr>
-//             <tr>
-//               <th scope="row">IP:</th>
-//                 <td>{data.ip}</td>
-//             </tr>
-//             <tr>
-//               <th scope="row">Área:</th>
-//                 <td>{data.area}</td>
-//             </tr>
-//             <tr>
-//               <th scope="row">Observaciones:</th>
-//                 <td>{data.observaciones}</td>
-//             </tr>
-//         </tbody>
-//     </table>
-// </div>);
   
   
   const tableData = {
@@ -504,9 +506,16 @@ const customStyles = {
   //     );
   // }, []);
 
+
   return (
 
     <div>
+
+      {/* <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+        <CSVLink className='btn btn-success btnDownloadCsv' data={data}>CSVDownload</CSVLink>
+      </div> */}
+
+      
 
         <LoadingBar 
             color="#f11946" 
@@ -516,15 +525,8 @@ const customStyles = {
             loaderSpeed={700}
         />
 
-            {/* <Loader 
-                fullPage 
-                loading={activeLoading}
-            /> */}
+        <ToastContainer />
 
-        {/* <Loader 
-            fullPage 
-            loading={show}
-        /> */}
         {
 
           mostrarCardTable
@@ -534,13 +536,19 @@ const customStyles = {
           <BootstrapCardDataTable />
 
           :
+          <>
 
+          <div className="btn-group float-right" role="group" aria-label="Basic mixed styles example">
+            <CSVLink className='btn btn-success btn-success-group' data={data} filename={"inventario-equipos.csv"}>CSV</CSVLink>
+          </div>
+          
           <DataTableExtensions
               {...tableData}
               export={false}
               print={false}
           >
             <DataTable
+                // actions={ actionsMemo }
                 title="Equipos de Cómputo"
                 // onRowClicked={ onRowClicked }
                 expandableRows
@@ -550,6 +558,7 @@ const customStyles = {
                 // contextActions={contextActions}
                 customStyles={customStyles}
                 fixedHeader={true}
+                fixedHeaderScrollHeight={`${width <= 767 && '450px'}`}
                 selectableRows
                 selectableRowsHighlight={true}
                 selectableRowsSingle
@@ -562,6 +571,7 @@ const customStyles = {
             />
 
           </DataTableExtensions>
+          </>
         }
 
 
@@ -571,7 +581,7 @@ const customStyles = {
 
           <EquiposAddNewBtn />
           
-          <EquiposModalNew />
+          {/* <EquiposModalNew /> */}
 
           <EquiposModalEdit />
 
